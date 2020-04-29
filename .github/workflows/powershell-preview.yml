@@ -1,0 +1,65 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+name: PowerShell preview Formula
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths:
+      - '.github/workflows/powershell-preview.yml'
+      - 'Formula/powershell-preview.rb'
+  schedule:
+    # At 20:20 UTC on every day-of-week from Monday through Friday.
+    - cron:  '35 01 * * 1-5'
+defaults:
+  run:
+    shell: pwsh
+env:
+  FORMULA_PATH: ./Formula/powershell-preview.rb
+  UPDATE_SCRIPT_PATH: ./scripts/Upgrade-Formula.ps1
+  FORMULA_NAME: powershell-preview
+  CHANNEL_NAME: preview
+jobs:
+  homebrew-formula:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # See https://brew.sh
+      - name: Install homebrew prerequisite
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      - name: (scheduled-auto-release) Auto-update formula
+        if: github.event_name == 'schedule'
+        run: |
+          &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
+      - name: brew install (Verify install of formula)
+        shell: bash
+        run: |
+          brew install --verbose --build-from-source $FORMULA_PATH
+      # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
+      - name: brew audit (Audit formula)
+        run: |
+          brew audit --strict --online --display-filename --display-cop-names $env:FORMULA_PATH
+      # See https://docs.brew.sh/Formula-Cookbook#add-a-test-to-the-formula
+      - name: brew test (Verify tests in formula)
+        run: |
+          brew test $env:FORMULA_PATH
+      - name: (scheduled-auto-release) Create Pull Request
+        if: github.event_name == 'schedule'
+        id: cpr
+        uses: peter-evans/create-pull-request@v2
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          commit-message: "Update ${{ env.FORMULA_NAME}} formula to version ${{ env.NEW_FORMULA_VERSION }}"
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          title: "Update ${{ env.FORMULA_NAME }} formula to version ${{ env.NEW_FORMULA_VERSION }}"
+          assignees: travisez13
+          reviewers: travisez13
+          base: master
+          draft: false
+          branch: powershell-preview-patch

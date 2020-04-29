@@ -1,0 +1,44 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+name: PowerShell LTS Formula
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths:
+      - '.github/workflows/powershell-lts.yml'
+      - 'Formula/powershell-lts.rb'
+  #schedule:
+    # At 16:00 UTC on every day-of-week from Monday through Friday.
+  #  - cron:  '0 16 * * 1-5'
+defaults:
+  run:
+    shell: pwsh
+env:
+  FORMULA_PATH: ./Formula/powershell-lts.rb
+  UPDATE_SCRIPT_PATH: ./scripts/update_formula.ps1
+  FORMULA_NAME: powershell-lts
+jobs:
+  homebrew-formula:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      # See https://brew.sh
+      - name: Install homebrew prerequisite
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      - name: brew install (Verify install of formula)
+        shell: bash
+        run: |
+          brew install --verbose --build-from-source $FORMULA_PATH
+      # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
+      - name: brew audit (Audit formula)
+        run: |
+          brew audit --strict --online --display-filename --display-cop-names $env:FORMULA_PATH
+      # See https://docs.brew.sh/Formula-Cookbook#add-a-test-to-the-formula
+      - name: brew test (Verify tests in formula)
+        run: |
+          brew test $env:FORMULA_PATH
