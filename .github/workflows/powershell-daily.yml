@@ -63,3 +63,4 @@ jobs:
           base: master
           draft: false
           branch: powershell-daily-patch-${{ env.GITHUB_RUN_NUMBER }}
+          labels: AutoMerge
