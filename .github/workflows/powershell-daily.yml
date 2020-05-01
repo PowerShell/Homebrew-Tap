@@ -23,6 +23,7 @@ env:
   CHANNEL_NAME: daily
 jobs:
   homebrew-formula:
+    timeout-minutes: 15
     runs-on: macos-latest
     steps:
       - name: Checkout
