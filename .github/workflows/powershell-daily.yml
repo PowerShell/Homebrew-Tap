@@ -32,6 +32,12 @@ jobs:
       - name: Install homebrew prerequisite
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      - name: (scheduled-auto-release) Add remote
+        run: |
+        if: github.event_name == 'schedule'
+          git config user.password ${{ secrets.PR_SECRET }}
+          git remote set-url origin https://github.com/machine-user/fork-of-repository
+          git fetch --unshallow -p origin
       - name: (scheduled-auto-release) Auto-update formula
         if: github.event_name == 'schedule'
         run: |
@@ -52,9 +58,9 @@ jobs:
         if: github.event_name == 'schedule'
         id: cpr
         uses: peter-evans/create-pull-request@v2
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
+          token: ${{ secrets.PR_SECRET }}
+          request-to-parent: true
           commit-message: "Update ${{ env.FORMULA_NAME}} formula to version ${{ env.NEW_FORMULA_VERSION }}"
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
