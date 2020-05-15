@@ -139,6 +139,11 @@ if ($versionMatch -and !$Force.IsPresent) {
 }
 
 Write-Host "::set-env name=NEW_FORMULA_VERSION::$expectedVersion"
+
+$branchPostfix = $expectedVersion.Replace('.','_')
+Write-Verbose "Branch postfix: $branchPostfix" -Verbose
+Write-Host "::set-env name=BRANCH_POSTFIX::$branchPostfix"
+
 Write-Verbose "Updating formula ..." -Verbose
 
 Update-Formula -PropertyName 'url' -CurrentFormula $newFormula -NewValue $expectedUrl -OriginalFomula $formulaString
