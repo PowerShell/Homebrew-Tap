@@ -12,13 +12,13 @@ on:
       - 'Formula/powershell-lts.rb'
   schedule:
     # At 20:20 UTC on every day-of-week from Monday through Friday.
-    - cron:  '5 21 * * *'
+    - cron:  '30 21 * * *'
 defaults:
   run:
     shell: pwsh
 env:
   FORMULA_PATH: ./Formula/powershell-lts.rb
-  UPDATE_SCRIPT_PATH: ./scripts/update_formula.ps1
+  UPDATE_SCRIPT_PATH: ./scripts/Upgrade-Formula.ps1
   FORMULA_NAME: powershell-lts
   CHANNEL_NAME: lts
 jobs:
