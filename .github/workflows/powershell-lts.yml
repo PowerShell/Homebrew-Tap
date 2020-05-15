@@ -4,6 +4,9 @@
 name: PowerShell LTS Formula
 on:
   push:
+    paths:
+      - '.github/workflows/powershell-lts.yml'
+      - 'Formula/powershell-lts.rb'
     branches:
       - master
   pull_request:
@@ -12,7 +15,7 @@ on:
       - 'Formula/powershell-lts.rb'
   schedule:
     # At 20:20 UTC on every day-of-week from Monday through Friday.
-    - cron:  '30 21 * * *'
+    - cron:  '0 0/5 * * *'
 defaults:
   run:
     shell: pwsh

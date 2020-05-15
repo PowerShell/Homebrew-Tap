@@ -4,6 +4,9 @@
 name: PowerShell Formula
 on:
   push:
+    paths:
+      - '.github/workflows/powershell.yml'
+      - 'Formula/powershell.rb'
     branches:
       - master
   pull_request:
@@ -12,7 +15,7 @@ on:
       - 'Formula/powershell.rb'
   schedule:
     # At 20:20 UTC on every day-of-week from Monday through Friday.
-    - cron:  '30 21 * * *'
+    - cron:  '0 0/4 * * *'
 defaults:
   run:
     shell: pwsh
