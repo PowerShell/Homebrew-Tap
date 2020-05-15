@@ -4,6 +4,9 @@
 name: PowerShell Formula
 on:
   push:
+    paths:
+      - '.github/workflows/powershell.yml'
+      - 'Formula/powershell.rb'
     branches:
       - master
   pull_request:

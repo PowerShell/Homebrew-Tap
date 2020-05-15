@@ -4,6 +4,9 @@
 name: PowerShell daily Formula
 on:
   push:
+    paths:
+      - '.github/workflows/powershell-daily.yml'
+      - 'Formula/powershell-daily.rb'
     branches:
       - master
   pull_request:
