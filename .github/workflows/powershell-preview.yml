@@ -15,7 +15,7 @@ on:
       - 'Formula/powershell-preview.rb'
   schedule:
     # At 20:20 UTC on every day-of-week from Monday through Friday.
-    - cron:  '30 21 * * *'
+    - cron:  '0 0/3 * * *'
 defaults:
   run:
     shell: pwsh
