@@ -22,7 +22,7 @@ env:
   FORMULA_NAME: powershell-daily
   CHANNEL_NAME: daily
 jobs:
-  homebrew-formula:
+  homebrew-formula-daily:
     timeout-minutes: 15
     runs-on: macos-latest
     steps:

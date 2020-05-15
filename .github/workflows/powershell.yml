@@ -22,7 +22,7 @@ env:
   FORMULA_NAME: powershell
   CHANNEL_NAME: stable
 jobs:
-  homebrew-formula:
+  homebrew-formula-stable:
     timeout-minutes: 15
     runs-on: macos-latest
     steps:
@@ -68,4 +68,4 @@ jobs:
           base: master
           draft: false
           branch: powershell-stable-patch-${{ env.BRANCH_POSTFIX }}
-	  
+

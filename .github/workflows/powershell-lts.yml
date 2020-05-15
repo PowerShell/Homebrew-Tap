@@ -22,7 +22,7 @@ env:
   FORMULA_NAME: powershell-lts
   CHANNEL_NAME: lts
 jobs:
-  homebrew-formula:
+  homebrew-formula-lst:
     timeout-minutes: 15
     runs-on: macos-latest
     steps:
@@ -60,4 +60,4 @@ jobs:
           base: master
           draft: false
           branch: powershell-preview-patch-${{ env.BRANCH_POSTFIX }}
-	  
+

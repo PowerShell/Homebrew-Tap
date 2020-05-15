@@ -22,7 +22,7 @@ env:
   FORMULA_NAME: powershell-preview
   CHANNEL_NAME: preview
 jobs:
-  homebrew-formula:
+  homebrew-formula-preview:
     timeout-minutes: 15
     runs-on: macos-latest
     steps:
@@ -64,4 +64,4 @@ jobs:
           base: master
           draft: false
           branch: powershell-preview-patch-${{ env.BRANCH_POSTFIX }}
-	  
+
