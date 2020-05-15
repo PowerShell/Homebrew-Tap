@@ -12,7 +12,7 @@ on:
       - 'Formula/powershell-preview.rb'
   schedule:
     # At 20:20 UTC on every day-of-week from Monday through Friday.
-    - cron:  '35 01 * * 1-5'
+    - cron:  '5 21 * * *'
 defaults:
   run:
     shell: pwsh
@@ -22,7 +22,8 @@ env:
   FORMULA_NAME: powershell-preview
   CHANNEL_NAME: preview
 jobs:
-  homebrew-formula:
+  homebrew-formula-preview:
+    timeout-minutes: 15
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -62,4 +63,5 @@ jobs:
           reviewers: travisez13
           base: master
           draft: false
-          branch: powershell-preview-patch
+          branch: powershell-preview-patch-${{ env.BRANCH_POSTFIX }}
+

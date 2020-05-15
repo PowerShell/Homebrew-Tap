@@ -22,7 +22,7 @@ env:
   FORMULA_NAME: powershell-daily
   CHANNEL_NAME: daily
 jobs:
-  homebrew-formula:
+  homebrew-formula-daily:
     timeout-minutes: 15
     runs-on: macos-latest
     steps:
@@ -63,5 +63,5 @@ jobs:
           reviewers: travisez13
           base: master
           draft: false
-          branch: powershell-daily-patch-${{ env.GITHUB_RUN_NUMBER }}
+          branch: powershell-daily-patch-${{ env.BRANCH_POSTFIX }}
           labels: Created_by_Action
