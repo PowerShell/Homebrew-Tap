@@ -23,6 +23,7 @@ env:
   CHANNEL_NAME: preview
 jobs:
   homebrew-formula:
+    timeout-minutes: 15
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -62,4 +63,5 @@ jobs:
           reviewers: travisez13
           base: master
           draft: false
-          branch: powershell-preview-patch
+          branch: powershell-preview-patch-${{ env.BRANCH_POSTFIX }}
+	  
