@@ -22,7 +22,7 @@ env:
   FORMULA_NAME: powershell-lts
   CHANNEL_NAME: lts
 jobs:
-  homebrew-formula-lst:
+  homebrew-formula-lts:
     timeout-minutes: 15
     runs-on: macos-latest
     steps:
@@ -32,6 +32,10 @@ jobs:
       - name: Install homebrew prerequisite
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      - name: (scheduled-auto-release) Auto-update formula
+        if: github.event_name == 'schedule'
+        run: |
+          &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
       - name: brew install (Verify install of formula)
         shell: bash
         run: |
@@ -59,5 +63,5 @@ jobs:
           reviewers: travisez13
           base: master
           draft: false
-          branch: powershell-preview-patch-${{ env.BRANCH_POSTFIX }}
+          branch: powershell-lts-patch-${{ env.BRANCH_POSTFIX }}
 
