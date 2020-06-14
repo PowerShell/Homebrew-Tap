@@ -13,7 +13,7 @@ Learn more about using PowerShell ...
 
 Issues can be reported at [PowerShell/PowerShell](https://github.com/PowerShell/PowerShell/issues/new/choose).
 
-## Install Insturctions
+## Install Instructions
 
 ### PowerShell Stable
 
