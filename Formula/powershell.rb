@@ -4,10 +4,10 @@ class Powershell < Formula
   desc "PowerShell"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.0.2/powershell-7.0.2-osx-x64.tar.gz"
-  version "7.0.2"
+  url "https://github.com/PowerShell/PowerShell/releases/download/v7.0.3/powershell-7.0.3-osx-x64.tar.gz"
+  version "7.0.3"
   # must be lower-case
-  sha256 "ca0b8d6893236f8a45d1f000fc482cdeec7054dbef8fb178dde6f8b3e15b8511"
+  sha256 "1290843389446e69536c5f9e15d328ea9a3dcda2a2ea7d63ef00566be1675ffa"
   version_scheme 1
   bottle :unneeded
 
@@ -38,7 +38,7 @@ class Powershell < Formula
   end
 
   test do
-    assert_equal "7.0.2",
+    assert_equal "7.0.3",
       shell_output("#{bin}/pwsh -c '$psversiontable.psversion.tostring()'").strip
   end
 end
