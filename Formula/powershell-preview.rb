@@ -4,10 +4,10 @@ class PowershellPreview < Formula
   desc "PowerShell Preview"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.1.0-preview.6/powershell-7.1.0-preview.6-osx-x64.tar.gz"
-  version "7.1.0-preview.6"
+  url "https://github.com/PowerShell/PowerShell/releases/download/v7.1.0-preview.7/powershell-7.1.0-preview.7-osx-x64.tar.gz"
+  version "7.1.0-preview.7"
   # must be lower-case
-  sha256 "1a691e4183fed8938eb3dddc1db4d3cdb9c6cab6977a283a6fa7a22e5984dc6e"
+  sha256 "6d59743343a8f6a7208851f986ad06546ce4a9e78d1f8c6578c5a567d7158be5"
   version_scheme 1
   bottle :unneeded
 
@@ -38,7 +38,7 @@ class PowershellPreview < Formula
   end
 
   test do
-    assert_equal "7.1.0-preview.6",
+    assert_equal "7.1.0-preview.7",
       shell_output("#{bin}/pwsh-preview -c '$psversiontable.psversion.tostring()'").strip
   end
 end
