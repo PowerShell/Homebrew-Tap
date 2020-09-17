@@ -31,7 +31,7 @@ class PowershellPreview < Formula
       If you also have the Cask installed, you need to run the following to make the formula your default install:
         brew link --overwrite powershell-preview
 
-      If you would like to make PowerShell you shell, run
+      If you would like to make PowerShell Preview your default shell, run
         sudo echo '#{bin}/pwsh-preview' >> /etc/shells
         chsh -s #{bin}/pwsh-preview
     EOS

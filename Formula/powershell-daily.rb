@@ -28,7 +28,7 @@ class PowershellDaily < Formula
       Other application files were installed at:
         #{libexec}
 
-      If you would like to make PowerShell you shell, run
+      If you would like to make PowerShell Daily your default shell, run
         sudo echo '#{bin}/pwsh-daily' >> /etc/shells
         chsh -s #{bin}/pwsh-daily
     EOS
