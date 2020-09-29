@@ -6,7 +6,7 @@
 # Doc for the class.
 # Class to implement Brew Formula to install PowerShell
 class PowershellLts < Formula
-  desc "PowerShell Long Term Stable Channel"
+  desc "Formula to install PowerShell Long Term Stable Channel"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   url "https://github.com/PowerShell/PowerShell/releases/download/v7.0.3/powershell-7.0.3-osx-x64.tar.gz"

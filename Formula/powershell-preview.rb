@@ -6,7 +6,7 @@
 # Doc for the class.
 # Class to implement Brew Formula to install PowerShell
 class PowershellPreview < Formula
-  desc "PowerShell Preview"
+  desc "Formula to install PowerShell Preview"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   url "https://github.com/PowerShell/PowerShell/releases/download/v7.1.0-preview.7/powershell-7.1.0-preview.7-osx-x64.tar.gz"
