@@ -1,7 +1,12 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
+
+# frozen_string_literal: true
+
+# Doc for the class.
+# Class to implement Brew Formula to install PowerShell
 class PowershellDaily < Formula
-  desc "PowerShell Daily"
+  desc "Formula to install PowerShell Daily"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   url "https://pscoretestdata.blob.core.windows.net/v7-1-0-daily-20200916/powershell-7.1.0-daily.20200916-osx-x64.tar.gz"
@@ -28,7 +33,7 @@ class PowershellDaily < Formula
       Other application files were installed at:
         #{libexec}
 
-      If you would like to make PowerShell you shell, run
+      If you would like to make PowerShell Daily your default shell, run
         sudo echo '#{bin}/pwsh-daily' >> /etc/shells
         chsh -s #{bin}/pwsh-daily
     EOS
@@ -36,6 +41,6 @@ class PowershellDaily < Formula
 
   test do
     assert_equal "7.1.0-daily.20200916",
-      shell_output("#{bin}/pwsh-daily -c '$psversiontable.psversion.tostring()'").strip
+                 shell_output("#{bin}/pwsh-daily -c '$psversiontable.psversion.tostring()'").strip
   end
 end
