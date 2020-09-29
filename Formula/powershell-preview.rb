@@ -1,5 +1,10 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
+
+# frozen_string_literal: true
+
+# Doc for the class.
+# Class to implement Brew Formula to install PowerShell
 class PowershellPreview < Formula
   desc "PowerShell Preview"
   homepage "https://github.com/powershell/powershell"
@@ -39,6 +44,6 @@ class PowershellPreview < Formula
 
   test do
     assert_equal "7.1.0-preview.7",
-      shell_output("#{bin}/pwsh-preview -c '$psversiontable.psversion.tostring()'").strip
+                 shell_output("#{bin}/pwsh-preview -c '$psversiontable.psversion.tostring()'").strip
   end
 end

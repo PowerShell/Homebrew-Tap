@@ -1,5 +1,10 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
+
+# frozen_string_literal: true
+
+# Doc for the class.
+# Class to implement Brew Formula to install PowerShell
 class PowershellLts < Formula
   desc "PowerShell Long Term Stable Channel"
   homepage "https://github.com/powershell/powershell"
@@ -39,6 +44,6 @@ class PowershellLts < Formula
 
   test do
     assert_equal "7.0.3",
-      shell_output("#{bin}/pwsh-lts -c '$psversiontable.psversion.tostring()'").strip
+                 shell_output("#{bin}/pwsh-lts -c '$psversiontable.psversion.tostring()'").strip
   end
 end

@@ -1,5 +1,10 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
+
+# frozen_string_literal: true
+
+# Doc for the class.
+# Class to implement Brew Formula to install PowerShell
 class PowershellDaily < Formula
   desc "PowerShell Daily"
   homepage "https://github.com/powershell/powershell"
@@ -36,6 +41,6 @@ class PowershellDaily < Formula
 
   test do
     assert_equal "7.1.0-daily.20200916",
-      shell_output("#{bin}/pwsh-daily -c '$psversiontable.psversion.tostring()'").strip
+                 shell_output("#{bin}/pwsh-daily -c '$psversiontable.psversion.tostring()'").strip
   end
 end
