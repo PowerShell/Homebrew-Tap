@@ -1,7 +1,9 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
+
+# frozen_string_literal: true
 class Powershell < Formula
-  desc "PowerShell"
+  desc "Formula to install PowerShell"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   url "https://github.com/PowerShell/PowerShell/releases/download/v7.0.3/powershell-7.0.3-osx-x64.tar.gz"
@@ -39,6 +41,6 @@ class Powershell < Formula
 
   test do
     assert_equal "7.0.3",
-      shell_output("#{bin}/pwsh -c '$psversiontable.psversion.tostring()'").strip
+                 shell_output("#{bin}/pwsh -c '$psversiontable.psversion.tostring()'").strip
   end
 end
