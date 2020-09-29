@@ -3,6 +3,8 @@
 
 # frozen_string_literal: true
 
+# Doc for the class.  
+# Class to implement Brew Formula to install PowerShell
 class Powershell < Formula
   desc "Formula to install PowerShell"
   homepage "https://github.com/powershell/powershell"
