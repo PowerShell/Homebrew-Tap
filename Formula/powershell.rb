@@ -2,6 +2,7 @@
 # Licensed under the MIT license.
 
 # frozen_string_literal: true
+
 class Powershell < Formula
   desc "Formula to install PowerShell"
   homepage "https://github.com/powershell/powershell"
