@@ -138,11 +138,11 @@ if ($versionMatch -and !$Force.IsPresent) {
     return
 }
 
-Write-Host "::set-env name=NEW_FORMULA_VERSION::$expectedVersion"
+"NEW_FORMULA_VERSION=$expectedVersion" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
 $branchPostfix = $expectedVersion.Replace('.','_')
 Write-Verbose "Branch postfix: $branchPostfix" -Verbose
-Write-Host "::set-env name=BRANCH_POSTFIX::$branchPostfix"
+"BRANCH_POSTFIX=$branchPostfix" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
 Write-Verbose "Updating formula ..." -Verbose
 
