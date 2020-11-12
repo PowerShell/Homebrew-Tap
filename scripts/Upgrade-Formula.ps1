@@ -130,6 +130,27 @@ if (! ($versionString -match "`"$versionPattern`"")) {
     throw "version not found"
 }
 
+Function Set-GHEnv {
+    param(
+        [parameter(Mandatory)]
+        [String]
+        $Name,
+
+        [parameter(Mandatory)]
+        [String]
+        $Value
+    )
+
+    if($env:GITHUB_ENV)
+    {
+         Write-Verbose -Verbose -Message "setting $Name to $Value"
+        "$Name=$Value" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+    }
+    else {
+        Write-Verbose -Verbose -Message "skipped setting $Name to $Value"
+    }
+}
+
 $version = $Matches.1
 
 $versionMatch = $version -eq $expectedVersion
@@ -138,11 +159,11 @@ if ($versionMatch -and !$Force.IsPresent) {
     return
 }
 
-"NEW_FORMULA_VERSION=$expectedVersion" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+Set-GHEnv -Name NEW_FORMULA_VERSION -Value $expectedVersion
 
 $branchPostfix = $expectedVersion.Replace('.','_')
 Write-Verbose "Branch postfix: $branchPostfix" -Verbose
-"BRANCH_POSTFIX=$branchPostfix" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+Set-GHEnv -Name BRANCH_POSTFIX -Value $branchPostfix
 
 Write-Verbose "Updating formula ..." -Verbose
 
