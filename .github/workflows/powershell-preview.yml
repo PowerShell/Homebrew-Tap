@@ -68,11 +68,13 @@ jobs:
           base: master
           draft: false
           branch: powershell-preview-patch-${{ env.BRANCH_POSTFIX }}
-  tap_syntax:
+  tap_syntax_preview:
     runs-on: ubuntu-latest
     env:
       HOMEBREW_FORCE_HOMEBREW_ON_LINUX: 1
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Set up Homebrew
       id: set-up-homebrew
       uses: Homebrew/actions/setup-homebrew@master
