@@ -87,4 +87,4 @@ jobs:
     - name: Install Bundler RubyGems
       run: brew install-bundler-gems
 
-    - run: brew test-bot --only-tap-syntax
+    - run: brew test-bot --tap powershell/tap --only-tap-syntax
