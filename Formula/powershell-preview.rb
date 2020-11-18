@@ -15,14 +15,15 @@ class PowershellPreview < Formula
   # must be lower-case
   sha256 "4e6d1cea00ae1fd6d7fce8d8021afbdddd85d8bce693b572d400da5f97e1f225"
   version_scheme 1
-  bottle :unneeded
-
-  # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
-  depends_on macos: :high_sierra
 
   livecheck do
     url :head
   end
+
+  bottle :unneeded
+
+  # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
+  depends_on macos: :high_sierra
 
   def install
     libexec.install Dir["*"]
