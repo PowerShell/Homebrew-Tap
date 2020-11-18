@@ -106,7 +106,7 @@ jobs:
     - name: Install Bundler RubyGems
       run: brew install-bundler-gems
 
-      - name: brew style
+    - name: brew style
       if: github.event_name != 'schedule'
       run: |
         brew style $env:FORMULA_PATH
