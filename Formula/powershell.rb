@@ -31,7 +31,7 @@ class Powershell < Formula
       The executable should already be on PATH so run with `pwsh`. If not, the full path to the executable is:
         #{bin}/pwsh
 
-      Other application files were installed at:
+      Other application files were installed at :
         #{libexec}
 
       If you also have the Cask installed, you need to run the following to make the formula your default install:
