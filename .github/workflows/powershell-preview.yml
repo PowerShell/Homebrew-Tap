@@ -68,4 +68,23 @@ jobs:
           base: master
           draft: false
           branch: powershell-preview-patch-${{ env.BRANCH_POSTFIX }}
+  tap_syntax:
+    runs-on: ubuntu-latest
+    env:
+      HOMEBREW_FORCE_HOMEBREW_ON_LINUX: 1
+    steps:
+    - name: Set up Homebrew
+      id: set-up-homebrew
+      uses: Homebrew/actions/setup-homebrew@master
 
+    - name: Cache Bundler RubyGems
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+        key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+        restore-keys: ${{ runner.os }}-rubygems-
+
+    - name: Install Bundler RubyGems
+      run: brew install-bundler-gems
+
+    - run: brew test-bot --only-tap-syntax
