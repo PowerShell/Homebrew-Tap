@@ -31,7 +31,7 @@ class PowershellDaily < Formula
       The executable should already be on PATH so run with `pwsh-daily`. If not, the full path to the executable is:
         #{bin}/pwsh-daily
 
-      Other application files were installed at:
+      Other application files were installed at :
         #{libexec}
 
       If you would like to make PowerShell Daily your default shell, run

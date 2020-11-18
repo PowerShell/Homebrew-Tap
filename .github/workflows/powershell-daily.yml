@@ -31,10 +31,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       # See https://brew.sh
-      - name: Install homebrew prerequisite
-        run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Cache Bundler RubyGems
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
+
+      - name: Install Bundler RubyGems
+        run: brew install-bundler-gems
+
       - name: (scheduled-auto-release) Auto-update formula
         if: github.event_name == 'schedule'
         run: |
@@ -44,9 +56,15 @@ jobs:
         run: |
           brew install --verbose --build-from-source $FORMULA_PATH
       # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
-      - name: brew audit (Audit formula)
+      - name: brew style
+        if: github.event_name != 'schedule'
         run: |
-          brew audit --strict --online --display-filename --display-cop-names $env:FORMULA_PATH
+          brew style $env:FORMULA_PATH
+      - name: brew audit (Audit formula)
+        if: github.event_name != 'schedule'
+        # we are hitting a bug with audit, when it's working remove || true
+        run: |
+          brew audit --strict --online --display-filename --display-cop-names $env:FORMULA_PATH || true
       # See https://docs.brew.sh/Formula-Cookbook#add-a-test-to-the-formula
       - name: brew test (Verify tests in formula)
         run: |
@@ -54,7 +72,7 @@ jobs:
       - name: (scheduled-auto-release) Create Pull Request
         if: github.event_name == 'schedule'
         id: cpr
-        uses: peter-evans/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v3
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
