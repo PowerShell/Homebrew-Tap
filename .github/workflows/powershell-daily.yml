@@ -54,7 +54,7 @@ jobs:
       - name: (scheduled-auto-release) Create Pull Request
         if: github.event_name == 'schedule'
         id: cpr
-        uses: peter-evans/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v3
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
