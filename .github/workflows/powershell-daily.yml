@@ -18,7 +18,7 @@ on:
     - cron:  '0 0/2 * * *'
 defaults:
   run:
-    shell: pwsh
+    shell: pwsh -l -command ". '{0}'"
 env:
   FORMULA_PATH: ./Formula/powershell-daily.rb
   UPDATE_SCRIPT_PATH: ./scripts/Upgrade-Formula.ps1
@@ -36,6 +36,9 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Force vendored Ruby on Catalina
+        run: echo 'HOMEBREW_FORCE_VENDOR_RUBY=1' >> $GITHUB_ENV
 
       - name: Cache Bundler RubyGems
         uses: actions/cache@v1
