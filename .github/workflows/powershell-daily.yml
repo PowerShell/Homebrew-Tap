@@ -37,18 +37,8 @@ jobs:
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Install rbenv via brew
-        run: |
-          brew install rbenv ruby-build
-
-      - name: setup ruby 2.6.3
-        run: |
-          rbenv install 2.6.3
-          rbenv global 2.6.3
-
-      - name: setup ruby environment
-        run: |
-          'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' | out-file -path ~/.bash_profile -force
+      - name: Force vendored Ruby on Catalina
+        run: echo 'HOMEBREW_FORCE_VENDOR_RUBY=1' >> $GITHUB_ENV
 
       - name: Cache Bundler RubyGems
         uses: actions/cache@v1
