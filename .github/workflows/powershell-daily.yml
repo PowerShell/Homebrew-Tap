@@ -18,7 +18,7 @@ on:
     - cron:  '0 0/2 * * *'
 defaults:
   run:
-    shell: pwsh
+    shell: pwsh -l -command ". '{0}'"
 env:
   FORMULA_PATH: ./Formula/powershell-daily.rb
   UPDATE_SCRIPT_PATH: ./scripts/Upgrade-Formula.ps1
@@ -37,12 +37,18 @@ jobs:
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
-      - name: antoheu
+      - name: Install rbenv via brew
         run: |
           brew install rbenv ruby-build
-          'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' | out-file -path ~/.bash_profile -force
+
+      - name: setup ruby 2.6.3
+        run: |
           rbenv install 2.6.3
           rbenv global 2.6.3
+
+      - name: setup ruby environment
+        run: |
+          'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' | out-file -path ~/.bash_profile -force
 
       - name: Cache Bundler RubyGems
         uses: actions/cache@v1
