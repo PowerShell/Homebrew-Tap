@@ -10,10 +10,10 @@ class PowershellLts < Formula
   desc "Formula to install PowerShell Long Term Stable Channel"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.0.4/powershell-7.0.4-osx-x64.tar.gz"
-  version "7.0.4"
+  url "https://github.com/PowerShell/PowerShell/releases/download/v7.0.5/powershell-7.0.5-osx-x64.tar.gz"
+  version "7.0.5"
   # must be lower-case
-  sha256 "6ae1459ade186919ed9e845e084850a781d1393ff63485d94a335bcfaa6f2eac"
+  sha256 "a5d83951716e6980a0ea91e4f0e049092e25a483e6f6ac7ab8e11f533ac79fdd"
   version_scheme 1
   bottle :unneeded
 
@@ -44,7 +44,7 @@ class PowershellLts < Formula
   end
 
   test do
-    assert_equal "7.0.4",
+    assert_equal "7.0.5",
                  shell_output("#{bin}/pwsh-lts -c '$psversiontable.psversion.tostring()'").strip
   end
 end
