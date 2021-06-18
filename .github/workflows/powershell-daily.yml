@@ -64,7 +64,7 @@ jobs:
         run: |
           brew style $env:FORMULA_PATH
       - name: brew audit (Audit formula)
-        uses: ./.github/workflows/composite
+        uses: ./.github/workflows/composite/audit
       # See https://docs.brew.sh/Formula-Cookbook#add-a-test-to-the-formula
       - name: brew test (Verify tests in formula)
         run: |
