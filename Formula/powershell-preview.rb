@@ -10,10 +10,10 @@ class PowershellPreview < Formula
   desc "Formula to install PowerShell Preview"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-preview.6/powershell-7.2.0-preview.6-osx-x64.tar.gz"
-  version "7.2.0-preview.6"
+  url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-preview.7/powershell-7.2.0-preview.7-osx-x64.tar.gz"
+  version "7.2.0-preview.7"
   # must be lower-case
-  sha256 "3e20637faa53deb1531e23d623b7003ba53acc2d7732737f5e45a1d1733675ca"
+  sha256 "3dbfb4f18d4e5478adbac64b3c7ec7f4afa1e82cea687a374f2d0f483ae14cc5"
   version_scheme 1
 
   livecheck do
@@ -49,7 +49,7 @@ class PowershellPreview < Formula
   end
 
   test do
-    assert_equal "7.2.0-preview.6",
+    assert_equal "7.2.0-preview.7",
                  shell_output("#{bin}/pwsh-preview -c '$psversiontable.psversion.tostring()'").strip
   end
 end
