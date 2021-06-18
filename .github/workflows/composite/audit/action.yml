@@ -1,0 +1,14 @@
+name: "brew audit"
+description: "brew audit"
+runs:
+  using: "composite"
+  steps:
+  # We are skipping `installed` because of the following error:
+  #  Broken dependencies:
+  #  Error: 1 problem in 1 formula detected
+  #    /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib (openssl)
+  #    /usr/local/opt/openssl/lib/libssl.1.0.0.dylib (openssl)
+  #  /Users/runner/work/Homebrew-Tap/Homebrew-Tap/Formula/powershell.rb: * powershell has broken dynamic library links:
+  - run: |
+      brew audit --strict --online --display-filename --display-cop-names --formula --except installed $env:FORMULA_PATH
+    shell: pwsh
