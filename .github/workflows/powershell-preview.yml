@@ -64,11 +64,7 @@ jobs:
         run: |
           brew style $env:FORMULA_PATH
       - name: brew audit (Audit formula)
-        if: github.event_name != 'schedule'
-        # we are hitting a bug with audit, when it's working remove || true
-        run: |
-          brew audit --strict --online --display-filename --display-cop-names $env:FORMULA_PATH || true
-      # See https://docs.brew.sh/Formula-Cookbook#add-a-test-to-the-formula
+        uses: .github/workflows/composite/audit.yml
       - name: brew test (Verify tests in formula)
         run: |
           brew test $env:FORMULA_PATH
