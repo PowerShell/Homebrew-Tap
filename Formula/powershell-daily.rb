@@ -10,10 +10,10 @@ class PowershellDaily < Formula
   desc "Formula to install PowerShell Daily"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://pscoretestdata.blob.core.windows.net/v7-2-0-daily20211012-2/powershell-7.2.0-daily20211012.2-osx-x64.tar.gz"
-  version "7.2.0-daily20211012.2"
+  url "https://pscoretestdata.blob.core.windows.net/v7-2-0-daily20211014-2/powershell-7.2.0-daily20211014.2-osx-x64.tar.gz"
+  version "7.2.0-daily20211014.2"
   # must be lower-case
-  sha256 "7764ac3b25400ab705f51f33806141765071200189a48e05ea881bd0de0aa15c"
+  sha256 "eea1f1df96b5ba33c452f415b416db689f4fbfb07b1e18a783868b65ad7f242c"
   version_scheme 1
   bottle :unneeded
 
@@ -41,7 +41,7 @@ class PowershellDaily < Formula
   end
 
   test do
-    assert_equal "7.2.0-daily20211012.2",
+    assert_equal "7.2.0-daily20211014.2",
                  shell_output("#{bin}/pwsh-daily -c '$psversiontable.psversion.tostring()'").strip
   end
 end
