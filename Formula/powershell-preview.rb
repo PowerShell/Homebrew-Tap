@@ -13,7 +13,7 @@ class PowershellPreview < Formula
   url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-rc.1/powershell-7.2.0-rc.1-osx-x64.tar.gz"
   version "7.2.0-rc.1"
   # must be lower-case
-  sha256 "51D2C32D600E74D5E9804FD90D9B808576A62D398EF1935F90C1E22C9F2858D3"
+  sha256 "3424064C85D22126A94092F053997F046B6FE6156A1381C386C6D48C571AEDF8"
   version_scheme 1
 
   livecheck do
