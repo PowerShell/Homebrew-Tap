@@ -10,17 +10,15 @@ class PowershellPreview < Formula
   desc "Formula to install PowerShell Preview"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-preview.10/powershell-7.2.0-preview.10-osx-x64.tar.gz"
-  version "7.2.0-preview.10"
+  url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-rc.1/powershell-7.2.0-rc.1-osx-x64.tar.gz"
+  version "7.2.0-rc.1"
   # must be lower-case
-  sha256 "7a7e4a335169a9be20643590f4dc5460cd8cd95564265d239733f88d0ff63f6b"
+  sha256 "51D2C32D600E74D5E9804FD90D9B808576A62D398EF1935F90C1E22C9F2858D3"
   version_scheme 1
 
   livecheck do
     url :head
   end
-
-  bottle :unneeded
 
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
   depends_on macos: :high_sierra
@@ -49,7 +47,7 @@ class PowershellPreview < Formula
   end
 
   test do
-    assert_equal "7.2.0-preview.10",
+    assert_equal "7.2.0-rc.1",
                  shell_output("#{bin}/pwsh-preview -c '$psversiontable.psversion.tostring()'").strip
   end
 end
