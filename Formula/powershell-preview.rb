@@ -20,8 +20,6 @@ class PowershellPreview < Formula
     url :head
   end
 
-  bottle :unneeded
-
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
   depends_on macos: :high_sierra
 

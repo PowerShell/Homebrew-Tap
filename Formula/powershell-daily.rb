@@ -15,7 +15,6 @@ class PowershellDaily < Formula
   # must be lower-case
   sha256 "5738268b50501b60c52fff7f5089294728070e472a6dea3687f7a1f4ff589de7"
   version_scheme 1
-  bottle :unneeded
 
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
   depends_on macos: :high_sierra
