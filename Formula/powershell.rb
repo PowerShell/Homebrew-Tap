@@ -10,10 +10,10 @@ class Powershell < Formula
   desc "Formula to install PowerShell"
   homepage "https://github.com/powershell/powershell"
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.1.5/powershell-7.1.5-osx-x64.tar.gz"
-  version "7.1.5"
+  url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0/powershell-7.2.0-osx-x64.tar.gz"
+  version "7.2.0"
   # must be lower-case
-  sha256 "0f55f67d48534671fd07017680fe55c48949a748009fef11b01585c47e6eb398"
+  sha256 "b1864c204c7861ff8416446335fa002c5e48d2d50292b6e221e05c946aa8b9ae"
   version_scheme 1
 
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
@@ -43,7 +43,7 @@ class Powershell < Formula
   end
 
   test do
-    assert_equal "7.1.5",
+    assert_equal "7.2.0",
                  shell_output("#{bin}/pwsh -c '$psversiontable.psversion.tostring()'").strip
   end
 end
