@@ -3,6 +3,7 @@
 
 name: PowerShell Formula
 on:
+  workflow_dispatch:
   push:
     paths:
       - '.github/workflows/powershell.yml'
