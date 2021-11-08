@@ -52,7 +52,7 @@ jobs:
         run: brew install-bundler-gems
 
       - name: (scheduled-auto-release) Auto-update formula
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
       - name: brew uninstall cask
@@ -75,7 +75,7 @@ jobs:
         run: |
           brew test $env:FORMULA_PATH
       - name: (scheduled-auto-release) Create Pull Request
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         id: cpr
         uses: peter-evans/create-pull-request@v3
         env:
