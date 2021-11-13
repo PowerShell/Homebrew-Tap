@@ -14,7 +14,7 @@ param(
 $retryCount = 3
 $retryIntervalSec = 15
 
-$urlTemplate = 'https://github.com/PowerShell/PowerShell/releases/download/v{0}/powershell-{0}-osx-x64.tar.gz'
+$urlTemplate = 'https://github.com/PowerShell/PowerShell/releases/download/v{0}/powershell-{0}-osx-{1}.tar.gz'
 Switch ($Channel) {
     'Stable' {
         $metadata = Invoke-RestMethod 'https://aka.ms/pwsh-buildinfo-stable' -MaximumRetryCount $retryCount -RetryIntervalSec $retryIntervalSec
@@ -120,17 +120,7 @@ function Update-Formula {
     $null = $CurrentFormula.Replace($propertyString, $newPropertyString)
 }
 
-$expectedUrl = $urlTemplate -f $expectedVersion
-Write-Verbose "new url: $expectedUrl" -Verbose
-
-$versionString = Get-FormulaString -OriginalFomula $formulaString -PropertyName 'version'
-
-$versionPattern = '(\d*\.\d*\.\d*(-\w*(\.\d*)?)?)'
-if (! ($versionString -match "`"$versionPattern`"")) {
-    throw "version not found"
-}
-
-Function Set-GHEnv {
+function Set-GHEnv {
     param(
         [parameter(Mandatory)]
         [String]
@@ -151,6 +141,13 @@ Function Set-GHEnv {
     }
 }
 
+$versionString = Get-FormulaString -OriginalFomula $formulaString -PropertyName 'version'
+
+$versionPattern = '(\d*\.\d*\.\d*(-\w*(\.\d*)?)?)'
+if (! ($versionString -match "`"$versionPattern`"")) {
+    throw "version not found"
+}
+
 $version = $Matches.1
 
 $versionMatch = $version -eq $expectedVersion
@@ -166,22 +163,27 @@ Write-Verbose "Branch postfix: $branchPostfix" -Verbose
 Set-GHEnv -Name BRANCH_POSTFIX -Value $branchPostfix
 
 Write-Verbose "Updating formula ..." -Verbose
-
-Update-Formula -PropertyName 'url' -CurrentFormula $newFormula -NewValue $expectedUrl -OriginalFomula $formulaString
-
-Update-Formula -PropertyName 'version' -CurrentFormula $newFormula -NewValue $expectedVersion -OriginalFomula $formulaString
-
 $versionPattern = '(\d*\.\d*\.\d*(-\w*(\.\d*)?)?)'
 Update-Formula -PropertyName 'assert_equal_version' -CurrentFormula $newFormula -NewValue $expectedVersion -Pattern ('^\s*assert_equal\s*"{0}",$' -f $versionPattern)  -OriginalFomula $formulaString
 
-Write-Verbose "Getting file to calculate hash..." -Verbose
-$ProgressPreference = 'SilentlyContinue'
-Invoke-WebRequest -Uri $expectedUrl -OutFile ./FileToHash.file
+Update-Formula -PropertyName 'version' -CurrentFormula $newFormula -NewValue $expectedVersion -OriginalFomula $formulaString
 
-$hash = (Get-FileHash -Path ./FileToHash.file -Algorithm SHA256).Hash.ToLower()
-Remove-Item ./FileToHash.file
-Write-Verbose "hash: $hash"
+foreach($architecture in 'x64', 'arm64') {
+    $expectedUrl = $urlTemplate -f $expectedVersion, $architecture
+    Write-Verbose "new url: $expectedUrl" -Verbose
 
-Update-Formula -PropertyName 'sha256' -CurrentFormula $newFormula -NewValue $hash -OriginalFomula $formulaString
+    Update-Formula -PropertyName "@${architecture}url =" -CurrentFormula $newFormula -NewValue $expectedUrl -OriginalFomula $formulaString
+
+    Write-Verbose "Getting file to calculate hash..." -Verbose
+    $ProgressPreference = 'SilentlyContinue'
+    Invoke-WebRequest -Uri $expectedUrl -OutFile ./FileToHash.file
+
+    $hash = (Get-FileHash -Path ./FileToHash.file -Algorithm SHA256).Hash.ToLower()
+    Remove-Item ./FileToHash.file
+    Write-Verbose "hash: $hash"
+
+    Update-Formula -PropertyName "@${architecture}sha256 =" -CurrentFormula $newFormula -NewValue $hash -OriginalFomula $formulaString
+}
 
 $newFormula.ToString() | Out-File -Encoding utf8NoBOM -FilePath $FormulaPath
+ 
