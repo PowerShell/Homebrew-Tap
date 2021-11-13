@@ -19,5 +19,5 @@ runs:
   #
   # We use version to quickly determine if an update is needed and we don't want to remove it
   - run: |
-      brew audit --strict --online --display-filename --display-cop-names --formula --except installed --except version $env:FORMULA_PATH
+      brew audit --strict --online --display-filename --display-cop-names --formula --except 'installed,version' $env:FORMULA_PATH
     shell: pwsh
