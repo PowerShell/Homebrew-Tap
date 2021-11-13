@@ -17,7 +17,7 @@ class PowershellDaily < Formula
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?
-    url @x64ur
+    url @x64url
     # must be lower-case
     sha256 @x64sha256
   else
