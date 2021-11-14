@@ -17,7 +17,7 @@ runs:
   #    Error: Stable: version 7.2.0-rc.1 is redundant with version scanned from URL
   #    Error: Process completed with exit code 1.
   #
-  # We use version to quickly determine if an update is needed and we don't want to remove it
+  # We use the version property to quickly determine if an update is needed and we don't want to remove it as the version rule which is being skipped suggests
   - run: |
       brew audit --strict --online --display-filename --display-cop-names --formula --except 'installed,version' $env:FORMULA_PATH
     shell: pwsh
