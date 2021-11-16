@@ -9,11 +9,24 @@
 class Powershell < Formula
   desc "Formula to install PowerShell"
   homepage "https://github.com/powershell/powershell"
+
+  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0/powershell-7.2.0-osx-arm64.tar.gz"
+  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0/powershell-7.2.0-osx-x64.tar.gz"
+  @arm64sha256 = "b48a07970550fe506b91ec2fa009fc8742b9dc20cacc2e34a6fe8a8f588149f1"
+  @x64sha256 = "b1864c204c7861ff8416446335fa002c5e48d2d50292b6e221e05c946aa8b9ae"
+
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0/powershell-7.2.0-osx-x64.tar.gz"
+  if Hardware::CPU.intel?
+    url @x64url
+    # must be lower-case
+    sha256 @x64sha256
+  else
+    url @arm64url
+    # must be lower-case
+    sha256 @arm64sha256
+  end
+
   version "7.2.0"
-  # must be lower-case
-  sha256 "b1864c204c7861ff8416446335fa002c5e48d2d50292b6e221e05c946aa8b9ae"
   version_scheme 1
 
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31

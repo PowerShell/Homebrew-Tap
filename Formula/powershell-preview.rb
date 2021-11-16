@@ -9,11 +9,24 @@
 class PowershellPreview < Formula
   desc "Formula to install PowerShell Preview"
   homepage "https://github.com/powershell/powershell"
+
+  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-rc.1/powershell-7.2.0-rc.1-osx-arm64.tar.gz"
+  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-rc.1/powershell-7.2.0-rc.1-osx-x64.tar.gz"
+  @arm64sha256 = "51d2c32d600e74d5e9804fd90d9b808576a62d398ef1935f90c1e22c9f2858d3"
+  @x64sha256 = "3424064c85d22126a94092f053997f046b6fe6156a1381c386c6d48c571aedf8"
+
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
-  url "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0-rc.1/powershell-7.2.0-rc.1-osx-x64.tar.gz"
+  if Hardware::CPU.intel?
+    url @x64url
+    # must be lower-case
+    sha256 @x64sha256
+  else
+    url @arm64url
+    # must be lower-case
+    sha256 @arm64sha256
+  end
+
   version "7.2.0-rc.1"
-  # must be lower-case
-  sha256 "3424064c85d22126a94092f053997f046b6fe6156a1381c386c6d48c571aedf8"
   version_scheme 1
 
   livecheck do
