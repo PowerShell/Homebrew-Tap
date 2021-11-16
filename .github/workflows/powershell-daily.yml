@@ -3,6 +3,7 @@
 
 name: PowerShell daily Formula
 on:
+  workflow_dispatch:
   push:
     paths:
       - '.github/workflows/powershell-daily.yml'
@@ -51,7 +52,7 @@ jobs:
         run: brew install-bundler-gems
 
       - name: (scheduled-auto-release) Auto-update formula
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
       - name: brew install (Verify install of formula)
@@ -60,18 +61,18 @@ jobs:
           brew install --verbose --build-from-source $FORMULA_PATH
       # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
       - name: brew style
-        if: github.event_name != 'schedule'
+        if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
         run: |
           brew style $env:FORMULA_PATH
       - name: brew audit (Audit formula)
-        if: github.event_name != 'schedule'
+        if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
         uses: ./.github/workflows/composite/audit
       # See https://docs.brew.sh/Formula-Cookbook#add-a-test-to-the-formula
       - name: brew test (Verify tests in formula)
         run: |
           brew test $env:FORMULA_PATH
       - name: (scheduled-auto-release) Create Pull Request
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         id: cpr
         uses: peter-evans/create-pull-request@v3
         env:
