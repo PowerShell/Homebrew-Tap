@@ -27,7 +27,7 @@ Switch ($Channel) {
     }
     'Daily' {
         $metadata = Invoke-RestMethod 'https://aka.ms/pwsh-buildinfo-Daily' -MaximumRetryCount $retryCount -RetryIntervalSec $retryIntervalSec
-        $urlTemplate = "https://pscoretestdata.blob.core.windows.net/$($metadata.blobname)/powershell-{0}-osx-x64.tar.gz"
+        $urlTemplate = "https://pscoretestdata.blob.core.windows.net/$($metadata.blobname)/powershell-{0}-osx-{1}.tar.gz"
     }
     default {
         throw "Invalid channel: $Channel"
