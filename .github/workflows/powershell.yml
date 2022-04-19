@@ -58,7 +58,7 @@ jobs:
       - name: brew uninstall cask
         shell: bash
         run: |
-          brew uninstall --cask $FORMULA_NAME || true
+          brew uninstall --formula $FORMULA_NAME || true
       - name: brew install (Verify install of formula)
         shell: bash
         run: |
