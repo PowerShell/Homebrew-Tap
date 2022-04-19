@@ -55,10 +55,10 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
-      - name: brew uninstall cask
+      - name: uninstall powershell
         shell: bash
         run: |
-          brew uninstall --formula $FORMULA_NAME || true
+          pkgutil --pkgs
       - name: brew install (Verify install of formula)
         shell: bash
         run: |
