@@ -59,9 +59,9 @@ jobs:
         shell: bash
         run: |
           cd /
-          pkgutil --only-files --files com.microsoft.powershell | awk '!/\.app/' | tr '\n' '\0' | xargs -n 1 -0 -p sudo rm
-          pkgutil --only-dirs --files com.microsoft.powershell | tr '\n' '\0' | xargs -n 1 -0 -p sudo rmdir
-          sudo pkgutil --forget com.microsoft.powershell
+          PKG_ID='com.microsoft.powershell'
+          pkgutil --only-files --files ${PKG_ID} | awk '!/\.app/' | tr '\n' '\0' | xargs -n 1 -0 -p sudo rm
+          sudo pkgutil --forget ${PKG_ID}
       - name: brew install (Verify install of formula)
         shell: bash
         run: |
