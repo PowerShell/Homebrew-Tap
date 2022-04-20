@@ -58,7 +58,10 @@ jobs:
       - name: uninstall powershell
         shell: bash
         run: |
-          pkgutil --pkgs
+          cd /
+          pkgutil --only-files --files com.microsoft.powershell | tr '\n' '\0' | xargs -n 1 -0 -p sudo rm
+          pkgutil --only-dirs --files com.microsoft.powershell | tr '\n' '\0' | xargs -n 1 -0 -p sudo rmdir
+          sudo pkgutil --forget com.microsoft.powershell
       - name: brew install (Verify install of formula)
         shell: bash
         run: |
