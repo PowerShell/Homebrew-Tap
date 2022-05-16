@@ -50,7 +50,7 @@ class Powershell < Formula
         brew link --overwrite powershell
 
       If you would like to make PowerShell your default shell, run
-        sudo sh -c "echo '#{bin}/pwsh'  >> /etc/shells"
+        sudo sh -c "echo '#{bin}/pwsh' >> /etc/shells"
         chsh -s #{bin}/pwsh
     EOS
   end
