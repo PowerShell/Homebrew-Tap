@@ -16,7 +16,7 @@ on:
       - 'Formula/powershell-daily.rb'
   schedule:
     # At at 23 minutes after every hour, every day-of-week from Monday through Friday.
-    - cron:  '0 0/2 * * *'
+    - cron:  '0 0 * * *'
 defaults:
   run:
     shell: pwsh -l -command ". '{0}'"
@@ -89,4 +89,4 @@ jobs:
           base: master
           draft: false
           branch: powershell-daily-patch-${{ env.BRANCH_POSTFIX }}
-          labels: Created_by_Action
+          #labels: Created_by_Action
