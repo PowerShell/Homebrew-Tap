@@ -10,10 +10,10 @@ class PowershellDaily < Formula
   desc "Formula to install PowerShell Daily"
   homepage "https://github.com/powershell/powershell"
 
-  @arm64url = "https://pscoretestdata.blob.core.windows.net/v7-3-0-daily20221116-1/powershell-7.3.0-daily20221116.1-osx-arm64.tar.gz"
-  @x64url = "https://pscoretestdata.blob.core.windows.net/v7-3-0-daily20221116-1/powershell-7.3.0-daily20221116.1-osx-x64.tar.gz"
-  @arm64sha256 = "3f320c7d8c69aa15186369ec90de7efc2b3b6a5ad22962c32eba512b68c98de6"
-  @x64sha256 = "96acf3a794f0ccfe3f16b2d10a97b70b728871f55f8a7b0c741503b380669cbc"
+  @arm64url = "https://pscoretestdata.blob.core.windows.net/v7-3-0-daily20221119-2/powershell-7.3.0-daily20221119.2-osx-arm64.tar.gz"
+  @x64url = "https://pscoretestdata.blob.core.windows.net/v7-3-0-daily20221119-2/powershell-7.3.0-daily20221119.2-osx-x64.tar.gz"
+  @arm64sha256 = "94f0075f692babe8e514318dbb39d36a268e5240642341828aca79c249892fe9"
+  @x64sha256 = "f56dc761cba3b3c57e315b61b95c8cb537cb8633e3aa88d672fc91ff90faa03b"
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?
@@ -26,7 +26,7 @@ class PowershellDaily < Formula
     sha256 @arm64sha256
   end
 
-  version "7.3.0-daily20221116.1"
+  version "7.3.0-daily20221119.2"
   version_scheme 1
 
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
@@ -53,7 +53,7 @@ class PowershellDaily < Formula
   end
 
   test do
-    assert_equal "7.3.0-daily20221116.1",
+    assert_equal "7.3.0-daily20221119.2",
                  shell_output("#{bin}/pwsh-daily -c '$psversiontable.psversion.tostring()'").strip
   end
 end
