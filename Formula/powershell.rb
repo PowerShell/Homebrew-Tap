@@ -10,10 +10,10 @@ class Powershell < Formula
   desc "Formula to install PowerShell"
   homepage "https://github.com/powershell/powershell"
 
-  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.3.1/powershell-7.3.1-osx-arm64.tar.gz"
-  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.3.1/powershell-7.3.1-osx-x64.tar.gz"
-  @arm64sha256 = "66ae3e155043011a0cb7025e748c385c101c464fc105f39818da678b702154bd"
-  @x64sha256 = "18529e2ef589dacfa62b3adaa0640edabf5f31fe4cc3d484d5060f93166e6156"
+  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.3.2/powershell-7.3.2-osx-arm64.tar.gz"
+  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.3.2/powershell-7.3.2-osx-x64.tar.gz"
+  @arm64sha256 = "8c5109212a2e0e8e1404abcbb8f5791592247cbd35d545479052d3a6b272df3f"
+  @x64sha256 = "f6310c5292b200acaa031ac6c1a425ff71da2da8aca9936c69a8ba090099c44d"
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?
@@ -26,7 +26,7 @@ class Powershell < Formula
     sha256 @arm64sha256
   end
 
-  version "7.3.1"
+  version "7.3.2"
   version_scheme 1
 
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
@@ -56,7 +56,7 @@ class Powershell < Formula
   end
 
   test do
-    assert_equal "7.3.1",
+    assert_equal "7.3.2",
                  shell_output("#{bin}/pwsh -c '$psversiontable.psversion.tostring()'").strip
   end
 end
