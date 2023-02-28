@@ -1,5 +1,14 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 name: "Prepare Agent"
+
 description: "Prepare Agent"
+
+defaults:
+  run:
+    shell: pwsh
+
 runs:
   using: "composite"
   steps:

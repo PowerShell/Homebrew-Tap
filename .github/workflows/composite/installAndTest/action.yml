@@ -1,5 +1,14 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 name: "install and test"
+
 description: "Install and test formula"
+
+defaults:
+  run:
+    shell: pwsh
+
 runs:
   using: "composite"
   steps:
