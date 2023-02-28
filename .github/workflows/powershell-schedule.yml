@@ -54,15 +54,12 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         id: cpr
         uses: peter-evans/create-pull-request@v3
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           commit-message: "Update ${{ env.FORMULA_NAME}} formula to version ${{ env.NEW_FORMULA_VERSION }}"
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          token: "${{ secrets.PR_PAT }}"
+          committer: PwshBot <pwshbot@microsoft.com>
+          author: PwshBot <pwshbot@microsoft.com>
           title: "Update ${{ env.FORMULA_NAME }} formula to version ${{ env.NEW_FORMULA_VERSION }}"
-          assignees: travisez13
-          reviewers: travisez13
           base: master
           draft: false
           branch: powershell-stable-patch-${{ env.BRANCH_POSTFIX }}
