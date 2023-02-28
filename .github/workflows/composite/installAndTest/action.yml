@@ -16,11 +16,14 @@ runs:
       shell: bash
       run: |
         brew install --verbose --build-from-source $FORMULA_PATH
+      shell: pwsh
+
     # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
     - name: brew style
       if: github.event_name != 'schedule'
       run: |
         brew style $env:FORMULA_PATH
+      shell: pwsh
 
     - name: brew audit (Audit formula)
       if: github.event_name != 'schedule'
@@ -48,3 +51,4 @@ runs:
     - name: brew test (Verify tests in formula)
       run: |
         brew test $env:FORMULA_PATH
+      shell: pwsh

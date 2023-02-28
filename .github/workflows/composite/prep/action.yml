@@ -19,6 +19,7 @@ runs:
 
     - name: Force vendored Ruby on Catalina
       run: echo 'HOMEBREW_FORCE_VENDOR_RUBY=1' >> $GITHUB_ENV
+      shell: pwsh
 
     - name: Cache Bundler RubyGems
       uses: actions/cache@v1
@@ -29,3 +30,4 @@ runs:
 
     - name: Install Bundler RubyGems
       run: brew install-bundler-gems
+      shell: pwsh
