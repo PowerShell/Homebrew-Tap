@@ -1,0 +1,41 @@
+name: "install and test"
+description: "Install and test formula"
+runs:
+  using: "composite"
+  steps:
+    - name: brew install (Verify install of formula)
+      shell: bash
+      run: |
+        brew install --verbose --build-from-source $FORMULA_PATH
+    # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
+    - name: brew style
+      if: github.event_name != 'schedule'
+      run: |
+        brew style $env:FORMULA_PATH
+
+    - name: brew audit (Audit formula)
+      if: github.event_name != 'schedule'
+      uses: ./.github/workflows/composite/audit
+
+    # We are skipping `installed` because of the following error:
+    #  Broken dependencies:
+    #  Error: 1 problem in 1 formula detected
+    #    /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib (openssl)
+    #    /usr/local/opt/openssl/lib/libssl.1.0.0.dylib (openssl)
+    #  /Users/runner/work/Homebrew-Tap/Homebrew-Tap/Formula/powershell.rb: * powershell has broken dynamic library links:
+
+    # We are skipping `version` because of the following error:
+    #  Broken dependencies:
+    #  /Users/runner/work/Homebrew-Tap/Homebrew-Tap/Formula/powershell-preview.rb: * Stable: version 7.2.0-rc.1 is redundant with version scanned from URL
+    #    Error: 1 problem in 1 formula detected
+    #    Error: Stable: version 7.2.0-rc.1 is redundant with version scanned from URL
+    #    Error: Process completed with exit code 1.
+    #
+    # We use the version property to quickly determine if an update is needed and we don't want to remove it as the version rule which is being skipped suggests
+    - run: |
+        brew audit --strict --online --display-filename --display-cop-names --formula --except 'installed,version' $env:FORMULA_PATH
+      shell: pwsh
+
+    - name: brew test (Verify tests in formula)
+      run: |
+        brew test $env:FORMULA_PATH

@@ -1,28 +1,20 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-name: PowerShell Formula
+name: PowerShell scheduled update
 
 permissions: read-all
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/powershell.yml'
-      - 'Formula/powershell.rb'
-    branches:
-      - master
-  pull_request:
-    paths:
-      - '.github/workflows/powershell.yml'
-      - 'Formula/powershell.rb'
   schedule:
     # At 20:20 UTC on every day-of-week from Monday through Friday.
     - cron:  '0 0/4 * * *'
+
 defaults:
   run:
     shell: pwsh
+
 env:
   FORMULA_PATH: ./Formula/powershell.rb
   UPDATE_SCRIPT_PATH: ./scripts/Upgrade-Formula.ps1
@@ -30,6 +22,7 @@ env:
   CHANNEL_NAME: stable
   HOMEBREW_NO_ENV_HINTS: 1
   HOMEBREW_NO_INSTALL_CLEANUP: 1
+
 jobs:
   homebrew-formula-stable:
     timeout-minutes: 15
@@ -38,28 +31,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # See https://brew.sh
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Force vendored Ruby on Catalina
-        run: echo 'HOMEBREW_FORCE_VENDOR_RUBY=1' >> $GITHUB_ENV
-
-      - name: Cache Bundler RubyGems
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ runner.os }}-rubygems-
-
-      - name: Install Bundler RubyGems
-        run: brew install-bundler-gems
+      - name: Prepare Agent
+        uses: ./.github/workflows/composite/prep
 
       - name: (scheduled-auto-release) Auto-update formula
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
+
       - name: uninstall powershell
         shell: bash
         run: |
@@ -67,21 +46,10 @@ jobs:
           PKG_ID='com.microsoft.powershell'
           pkgutil --only-files --files ${PKG_ID} | awk '!/\.app/' | tr '\n' '\0' | xargs -n 1 -0 -p sudo rm
           sudo pkgutil --forget ${PKG_ID}
-      - name: brew install (Verify install of formula)
-        shell: bash
-        run: |
-          brew install --verbose --build-from-source $FORMULA_PATH
-      # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
-      - name: brew style
-        if: github.event_name != 'schedule'
-        run: |
-          brew style $env:FORMULA_PATH
-      - name: brew audit (Audit formula)
-        if: github.event_name != 'schedule'
-        uses: ./.github/workflows/composite/audit
-      - name: brew test (Verify tests in formula)
-        run: |
-          brew test $env:FORMULA_PATH
+
+      - name: Install and Test Formula
+        uses: ./.github/workflows/composite/installAndTest
+
       - name: (scheduled-auto-release) Create Pull Request
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         id: cpr
@@ -98,4 +66,3 @@ jobs:
           base: master
           draft: false
           branch: powershell-stable-patch-${{ env.BRANCH_POSTFIX }}
-
