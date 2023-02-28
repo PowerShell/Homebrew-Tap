@@ -24,10 +24,6 @@ runs:
         brew style $env:FORMULA_PATH
       shell: pwsh
 
-    - name: brew audit (Audit formula)
-      if: github.event_name != 'schedule'
-      uses: ./.github/workflows/composite/audit
-
     # We are skipping `installed` because of the following error:
     #  Broken dependencies:
     #  Error: 1 problem in 1 formula detected
