@@ -15,7 +15,7 @@ runs:
     - name: brew install (Verify install of formula)
       shell: bash
       run: |
-        brew install --verbose --build-from-source $FORMULA_PATH
+        brew install --verbose --formula $FORMULA_PATH
 
     # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
     - name: brew style
