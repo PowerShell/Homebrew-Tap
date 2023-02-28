@@ -42,6 +42,9 @@ runs:
     - run: |
         brew audit --strict --online --display-filename --display-cop-names --formula --except 'installed,version' $env:FORMULA_PATH
       shell: pwsh
+      if: github.event_name != 'schedule'
+      env:
+        HOMEBREW_FORCE_VENDOR_RUBY: 1
 
     - name: brew test (Verify tests in formula)
       run: |

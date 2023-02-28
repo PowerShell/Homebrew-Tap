@@ -17,10 +17,6 @@ runs:
       id: set-up-homebrew
       uses: Homebrew/actions/setup-homebrew@master
 
-    - name: Force vendored Ruby on Catalina
-      run: echo 'HOMEBREW_FORCE_VENDOR_RUBY=1' >> $GITHUB_ENV
-      shell: pwsh
-
     - name: Cache Bundler RubyGems
       uses: actions/cache@v1
       with:
@@ -30,4 +26,8 @@ runs:
 
     - name: Install Bundler RubyGems
       run: brew install-bundler-gems
+      shell: pwsh
+
+    - name: Update Brew
+      run: brew update --force --verbose
       shell: pwsh
