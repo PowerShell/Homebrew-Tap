@@ -39,7 +39,7 @@ jobs:
         run: |
           &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
 
-      - name: uninstall powershell
+      - name: Uninstall PowerShell
         shell: bash
         run: |
           cd /

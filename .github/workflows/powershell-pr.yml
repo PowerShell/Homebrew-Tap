@@ -41,7 +41,7 @@ jobs:
       - name: Prepare Agent
         uses: ./.github/workflows/composite/prep
 
-      - name: uninstall powershell
+      - name: Uninstall PowerShell
         shell: bash
         run: |
           cd /
