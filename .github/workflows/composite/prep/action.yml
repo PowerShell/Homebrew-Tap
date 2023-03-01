@@ -36,6 +36,7 @@ runs:
       if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
       run: |
         &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
+      shell: pwsh
 
     - name: Make local repo a tap
       run: |
