@@ -42,5 +42,5 @@ runs:
       run: |
         git add -A
         git commit -m "checkpoint"
-        git clone ./ "$(brew --repo)/Library/Taps/powershell/tap"
+        git clone ./ "$(brew --repo)/Library/Taps/powershell/homebrew-tap"
       shell: pwsh
