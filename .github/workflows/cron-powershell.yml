@@ -45,17 +45,5 @@ jobs:
       - name: Install and Test Formula
         uses: ./.github/workflows/composite/installAndTest
 
-      - name: (scheduled-auto-release) Create Pull Request
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-        id: cpr
-        uses: peter-evans/create-pull-request@v3
-        with:
-          commit-message: "Update ${{ env.FORMULA_NAME}} formula to version ${{ env.NEW_FORMULA_VERSION }}"
-          token: "${{ secrets.PR_PAT }}"
-          committer: PwshBot <pwshbot@microsoft.com>
-          author: PwshBot <pwshbot@microsoft.com>
-          title: "Update ${{ env.FORMULA_NAME }} formula to version ${{ env.NEW_FORMULA_VERSION }}"
-          base: master
-          draft: false
-          branch: powershell-stable-patch-${{ env.BRANCH_POSTFIX }}
-          push-to-fork: pwshBot/Homebrew-Tap
+      - name: Create PR if needed
+        uses: ./.github/workflows/composite/createPR
