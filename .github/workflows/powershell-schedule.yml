@@ -58,3 +58,4 @@ jobs:
           base: master
           draft: false
           branch: powershell-stable-patch-${{ env.BRANCH_POSTFIX }}
+          push-to-fork: pwshBot/Homebrew-Tap
