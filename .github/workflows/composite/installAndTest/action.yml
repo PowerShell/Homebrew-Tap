@@ -15,7 +15,7 @@ runs:
     - name: brew install (Verify install of formula)
       shell: bash
       run: |
-        brew install --verbose --formula $FORMULA_PATH
+        brew install --verbose --formula $FORMULA_NAME
 
     # See https://docs.brew.sh/Formula-Cookbook#audit-the-formula
     - name: brew style
@@ -39,9 +39,14 @@ runs:
     #    Error: Process completed with exit code 1.
     #
     # We use the version property to quickly determine if an update is needed and we don't want to remove it as the version rule which is being skipped suggests
+
+    # Broken, because it needs to be setup like a real tap
+    # https://github.com/Homebrew/brew/issues/1505#issuecomment-260579390
+
     - run: |
         brew audit --strict --online --display-filename --display-cop-names --formula --except 'installed,version' $env:FORMULA_NAME
       shell: pwsh
+      name: Brew Audit
       if: github.event_name != 'schedule'
 
     - name: brew test (Verify tests in formula)

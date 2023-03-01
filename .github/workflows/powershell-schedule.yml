@@ -34,11 +34,6 @@ jobs:
       - name: Prepare Agent
         uses: ./.github/workflows/composite/prep
 
-      - name: (scheduled-auto-release) Auto-update formula
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-        run: |
-          &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
-
       - name: Uninstall PowerShell
         shell: bash
         run: |

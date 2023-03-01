@@ -31,3 +31,15 @@ runs:
     - name: Update Brew
       run: brew update --force --verbose
       shell: pwsh
+
+    - name: (scheduled-auto-release) Auto-update formula
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      run: |
+        &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
+
+    - name: Make local repo a tap
+      run: |
+        git add -A
+        git commit -m "checkpoint"
+        git clone ./ "$(brew --repo)/Library/Taps/powershell/tap"
+      shell: pwsh
