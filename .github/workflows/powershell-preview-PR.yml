@@ -1,37 +1,35 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-name: PowerShell daily Formula
+name: PowerShell preview PR
 
 permissions: read-all
 
 on:
-  workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/powershell-daily.yml'
-      - 'Formula/powershell-daily.rb'
+      - '.github/workflows/powershell-preview.yml'
+      - 'Formula/powershell-preview.rb'
     branches:
       - master
   pull_request:
     paths:
-      - '.github/workflows/powershell-daily.yml'
-      - 'Formula/powershell-daily.rb'
+      - '.github/workflows/powershell-preview.yml'
+      - 'Formula/powershell-preview.rb'
 
 defaults:
   run:
-    shell: pwsh -l -command ". '{0}'"
-
+    shell: pwsh
 env:
-  FORMULA_PATH: ./Formula/powershell-daily.rb
+  FORMULA_PATH: ./Formula/powershell-preview.rb
   UPDATE_SCRIPT_PATH: ./scripts/Upgrade-Formula.ps1
-  FORMULA_NAME: powershell-daily
-  CHANNEL_NAME: daily
+  FORMULA_NAME: powershell-preview
+  CHANNEL_NAME: preview
   HOMEBREW_NO_ENV_HINTS: 1
   HOMEBREW_NO_INSTALL_CLEANUP: 1
 
 jobs:
-  homebrew-formula-daily:
+  homebrew-formula-preview:
     timeout-minutes: 15
     runs-on: macos-latest
     steps:
