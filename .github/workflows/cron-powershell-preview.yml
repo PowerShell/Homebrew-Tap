@@ -41,3 +41,6 @@ jobs:
 
       - name: Install and Test Formula
         uses: ./.github/workflows/composite/installAndTest
+
+      - name: Create PR if needed
+        uses: ./.github/workflows/composite/createPR
