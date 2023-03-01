@@ -1,0 +1,60 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+name: PowerShell scheduled update
+
+permissions: read-all
+
+on:
+  workflow_dispatch:
+  schedule:
+    # At 20:20 UTC on every day-of-week from Monday through Friday.
+    - cron:  '0 0/4 * * *'
+
+defaults:
+  run:
+    shell: pwsh
+
+env:
+  FORMULA_PATH: ./Formula/powershell.rb
+  UPDATE_SCRIPT_PATH: ./scripts/Upgrade-Formula.ps1
+  FORMULA_NAME: powershell
+  CHANNEL_NAME: stable
+  HOMEBREW_NO_ENV_HINTS: 1
+  HOMEBREW_NO_INSTALL_CLEANUP: 1
+
+jobs:
+  homebrew-formula-stable:
+    timeout-minutes: 15
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prepare Agent
+        uses: ./.github/workflows/composite/prep
+
+      - name: Uninstall PowerShell
+        shell: bash
+        run: |
+          cd /
+          PKG_ID='com.microsoft.powershell'
+          pkgutil --only-files --files ${PKG_ID} | awk '!/\.app/' | tr '\n' '\0' | xargs -n 1 -0 -p sudo rm
+          sudo pkgutil --forget ${PKG_ID}
+
+      - name: Install and Test Formula
+        uses: ./.github/workflows/composite/installAndTest
+
+      - name: (scheduled-auto-release) Create Pull Request
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "Update ${{ env.FORMULA_NAME}} formula to version ${{ env.NEW_FORMULA_VERSION }}"
+          token: "${{ secrets.PR_PAT }}"
+          committer: PwshBot <pwshbot@microsoft.com>
+          author: PwshBot <pwshbot@microsoft.com>
+          title: "Update ${{ env.FORMULA_NAME }} formula to version ${{ env.NEW_FORMULA_VERSION }}"
+          base: master
+          draft: false
+          branch: powershell-stable-patch-${{ env.BRANCH_POSTFIX }}

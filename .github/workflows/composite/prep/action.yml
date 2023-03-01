@@ -1,0 +1,46 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+name: "Prepare Agent"
+
+description: "Prepare Agent"
+
+defaults:
+  run:
+    shell: pwsh
+
+runs:
+  using: "composite"
+  steps:
+    # See https://brew.sh
+    - name: Set up Homebrew
+      id: set-up-homebrew
+      uses: Homebrew/actions/setup-homebrew@master
+
+    - name: Cache Bundler RubyGems
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+        key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+        restore-keys: ${{ runner.os }}-rubygems-
+
+    - name: Install Bundler RubyGems
+      run: brew install-bundler-gems
+      shell: pwsh
+
+    - name: Update Brew
+      run: brew update --force --verbose
+      shell: pwsh
+
+    - name: (scheduled-auto-release) Auto-update formula
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      run: |
+        &$env:UPDATE_SCRIPT_PATH -FormulaPath $env:FORMULA_PATH -Channel $env:CHANNEL_NAME
+      shell: pwsh
+
+    - name: Make local repo a tap
+      run: |
+        git add -A
+        git commit -m "checkpoint"
+        git clone ./ "$(brew --repo)/Library/Taps/powershell/homebrew-tap"
+      shell: pwsh
