@@ -5,10 +5,6 @@ name: "install and test"
 
 description: "Install and test formula"
 
-defaults:
-  run:
-    shell: pwsh
-
 runs:
   using: "composite"
   steps:
@@ -39,10 +35,6 @@ runs:
     #    Error: Process completed with exit code 1.
     #
     # We use the version property to quickly determine if an update is needed and we don't want to remove it as the version rule which is being skipped suggests
-
-    # Broken, because it needs to be setup like a real tap
-    # https://github.com/Homebrew/brew/issues/1505#issuecomment-260579390
-
     - run: |
         brew audit --strict --online --display-filename --display-cop-names --formula --except 'installed,version' $env:FORMULA_NAME
       shell: pwsh
