@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-name: PowerShell preview PR
+name: PowerShell preview scheduled update
 
 permissions: read-all
 
