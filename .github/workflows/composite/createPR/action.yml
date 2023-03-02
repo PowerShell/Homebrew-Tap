@@ -5,6 +5,10 @@ name: "Create PR"
 
 description: "Create PR"
 
+inputs:
+  token:
+    description: Token used to create PR
+
 runs:
   using: "composite"
   steps:
@@ -14,7 +18,7 @@ runs:
         uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4.2.3
         with:
           commit-message: "Update ${{ env.FORMULA_NAME}} formula to version ${{ env.NEW_FORMULA_VERSION }}"
-          token: "${{ secrets.PR_PAT }}"
+          token: ${{ inputs.who-to-greet }}
           committer: PwshBot <pwshbot@microsoft.com>
           author: PwshBot <pwshbot@microsoft.com>
           title: "Update ${{ env.FORMULA_NAME }} formula to version ${{ env.NEW_FORMULA_VERSION }}"

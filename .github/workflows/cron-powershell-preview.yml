@@ -38,3 +38,5 @@ jobs:
 
       - name: Create PR if needed
         uses: ./.github/workflows/composite/createPR
+        with:
+          token: ${{ secrets.PR_PAT }}
