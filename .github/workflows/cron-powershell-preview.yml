@@ -6,16 +6,10 @@ name: PowerShell preview PR
 permissions: read-all
 
 on:
-  push:
-    paths:
-      - '.github/workflows/powershell-preview.yml'
-      - 'Formula/powershell-preview.rb'
-    branches:
-      - master
-  pull_request:
-    paths:
-      - '.github/workflows/powershell-preview.yml'
-      - 'Formula/powershell-preview.rb'
+  workflow_dispatch:
+  schedule:
+    # At 20:20 UTC on every day-of-week from Monday through Friday.
+    - cron:  '0 0/4 * * *'
 
 defaults:
   run:
