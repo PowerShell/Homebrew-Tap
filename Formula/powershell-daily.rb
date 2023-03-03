@@ -9,6 +9,7 @@
 class PowershellDaily < Formula
   desc "Formula to install PowerShell Daily"
   homepage "https://github.com/powershell/powershell"
+  deprecate! date: "2023-03-03", because: :unmaintained
 
   @arm64url = "https://pscoretestdata.blob.core.windows.net/v7-4-0-daily20230212-2/powershell-7.4.0-daily20230212.2-osx-arm64.tar.gz"
   @x64url = "https://pscoretestdata.blob.core.windows.net/v7-4-0-daily20230212-2/powershell-7.4.0-daily20230212.2-osx-x64.tar.gz"
