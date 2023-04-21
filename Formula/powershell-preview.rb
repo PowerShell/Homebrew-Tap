@@ -10,10 +10,10 @@ class PowershellPreview < Formula
   desc "Formula to install PowerShell Preview"
   homepage "https://github.com/powershell/powershell"
 
-  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.0-preview.2/powershell-7.4.0-preview.2-osx-arm64.tar.gz"
-  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.0-preview.2/powershell-7.4.0-preview.2-osx-x64.tar.gz"
-  @arm64sha256 = "4ace9766c8b21df06209483d475c31a24775b30cd211340cfd622bfb8979c3df"
-  @x64sha256 = "4ef9276d3c0e1e4e4ee58f3d7d93cc76cfcaff5e3a1031cb3e6539ca81d856a9"
+  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.0-preview.3/powershell-7.4.0-preview.3-osx-arm64.tar.gz"
+  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.0-preview.3/powershell-7.4.0-preview.3-osx-x64.tar.gz"
+  @arm64sha256 = "b5ddf90bbfa8364a340edc81d7a60dede7b82290cf662c78f8a36c820e1e4d62"
+  @x64sha256 = "ec93ce26d46c546c4665658f11a0f6ed4262785feeaf7759102584361957a161"
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?
@@ -26,7 +26,7 @@ class PowershellPreview < Formula
     sha256 @arm64sha256
   end
 
-  version "7.4.0-preview.2"
+  version "7.4.0-preview.3"
   version_scheme 1
 
   livecheck do
@@ -60,7 +60,7 @@ class PowershellPreview < Formula
   end
 
   test do
-    assert_equal "7.4.0-preview.2",
+    assert_equal "7.4.0-preview.3",
                  shell_output("#{bin}/pwsh-preview -c '$psversiontable.psversion.tostring()'").strip
   end
 end

@@ -41,6 +41,6 @@ runs:
     - name: Make local repo a tap
       run: |
         git add -A
-        git commit -m "checkpoint"
+        git commit -m "Update ${{ env.FORMULA_NAME }} formula to version ${{ env.NEW_FORMULA_VERSION }}"
         git clone ./ "$(brew --repo)/Library/Taps/powershell/homebrew-tap"
       shell: pwsh
