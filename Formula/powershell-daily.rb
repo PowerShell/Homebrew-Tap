@@ -10,10 +10,10 @@ class PowershellDaily < Formula
   desc "Formula to install PowerShell Daily"
   homepage "https://github.com/powershell/powershell"
 
-  @arm64url = "https://pscoretestdata.blob.core.windows.net/v7-4-0-daily20230412-1/powershell-7.4.0-daily20230412.1-osx-arm64.tar.gz"
-  @x64url = "https://pscoretestdata.blob.core.windows.net/v7-4-0-daily20230412-1/powershell-7.4.0-daily20230412.1-osx-x64.tar.gz"
-  @arm64sha256 = "ffce9ebd1c184a8e503ee8c52533a1c89296a16b11b749a475a2d36949a9c1ab"
-  @x64sha256 = "a3052a5531a70a5bf39593571fccc1af18e3c8117df999f4466f67f514f1053f"
+  @arm64url = "https://pscoretestdata.blob.core.windows.net/v7-4-0-daily20230422-1/powershell-7.4.0-daily20230422.1-osx-arm64.tar.gz"
+  @x64url = "https://pscoretestdata.blob.core.windows.net/v7-4-0-daily20230422-1/powershell-7.4.0-daily20230422.1-osx-x64.tar.gz"
+  @arm64sha256 = "db7eebeda0083c9c621a61f516c53dc2ed934fabcedbe5a70a2a0c46654215f0"
+  @x64sha256 = "88c954846165afd346a7e3b3ad11a25ec288b1225679f5121110a25eae098fdc"
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?
@@ -26,7 +26,7 @@ class PowershellDaily < Formula
     sha256 @arm64sha256
   end
 
-  version "7.4.0-daily20230412.1"
+  version "7.4.0-daily20230422.1"
   version_scheme 1
 
   # Deprecated because we are unable to maintain the automation to update the formula
@@ -56,7 +56,7 @@ class PowershellDaily < Formula
   end
 
   test do
-    assert_equal "7.4.0-daily20230412.1",
+    assert_equal "7.4.0-daily20230422.1",
                  shell_output("#{bin}/pwsh-daily -c '$psversiontable.psversion.tostring()'").strip
   end
 end
