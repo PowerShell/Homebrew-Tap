@@ -8,8 +8,8 @@ permissions: read-all
 on:
   workflow_dispatch:
   schedule:
-    # At 20:20 UTC on every day-of-week from Monday through Friday.
-    - cron:  '0 0 * * 1'
+    # On the 15th of the month
+    - cron:  '0 0 15 * *'
 
 defaults:
   run:
