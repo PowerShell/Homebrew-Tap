@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-name: PowerShell daily Formula
+name: PowerShell daily Formula PR
 
 permissions: read-all
 
@@ -9,14 +9,11 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/powershell-daily.yml'
+      - '.github/workflows/PR-powershell-daily.yml'
       - 'Formula/powershell-daily.rb'
     branches:
       - master
   pull_request:
-    paths:
-      - '.github/workflows/powershell-daily.yml'
-      - 'Formula/powershell-daily.rb'
 
 defaults:
   run:
@@ -37,9 +34,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Check for applicable files
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+        id: filter
+        with:
+          filters: |
+            workflows:
+              - .github/workflows/PR-powershell-preview.yml
+              - Formula/powershell-preview.rb
 
       - name: Prepare Agent
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/prep
 
       - name: Install and Test Formula
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/installAndTest
