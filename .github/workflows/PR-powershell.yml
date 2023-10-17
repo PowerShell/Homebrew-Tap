@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/powershell.yml'
+      - '.github/workflows/PR-powershell.yml'
       - 'Formula/powershell.rb'
     branches:
       - master
@@ -40,7 +40,7 @@ jobs:
         with:
           filters: |
             workflows:
-              - '.github/workflows/powershell.yml'
+              - '.github/workflows/PR-powershell.yml'
               - 'Formula/powershell.rb'
 
       - name: Prepare Agent
