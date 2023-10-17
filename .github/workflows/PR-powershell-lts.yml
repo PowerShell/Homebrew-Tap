@@ -8,14 +8,11 @@ permissions: read-all
 on:
   push:
     paths:
-      - '.github/workflows/powershell-lts.yml'
+      - '.github/workflows/PR-powershell-lts.yml'
       - 'Formula/powershell-lts.rb'
     branches:
       - master
   pull_request:
-    paths:
-      - '.github/workflows/powershell-lts.yml'
-      - 'Formula/powershell-lts.rb'
 
 defaults:
   run:
