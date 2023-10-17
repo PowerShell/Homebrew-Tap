@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-name: PowerShell Formula CI
+name: PowerShell Formula PR
 
 permissions: read-all
 
@@ -9,14 +9,11 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/powershell.yml'
+      - '.github/workflows/PR-powershell.yml'
       - 'Formula/powershell.rb'
     branches:
       - master
   pull_request:
-    paths:
-      - '.github/workflows/powershell.yml'
-      - 'Formula/powershell.rb'
 
 defaults:
   run:
@@ -38,10 +35,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Check for applicable files
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+        id: filter
+        with:
+          filters: |
+            workflows:
+              - '.github/workflows/PR-powershell.yml'
+              - 'Formula/powershell.rb'
+
       - name: Prepare Agent
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/prep
 
       - name: Uninstall PowerShell
+        if: steps.filter.outputs.workflows == 'true'
         shell: bash
         run: |
           cd /
@@ -50,4 +58,5 @@ jobs:
           sudo pkgutil --forget ${PKG_ID}
 
       - name: Install and Test Formula
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/installAndTest
