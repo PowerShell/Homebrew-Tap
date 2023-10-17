@@ -14,9 +14,6 @@ on:
     branches:
       - master
   pull_request:
-    paths:
-      - '.github/workflows/powershell.yml'
-      - 'Formula/powershell.rb'
 
 defaults:
   run:
@@ -38,10 +35,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            workflows:
+              - '.github/workflows/powershell.yml'
+              - 'Formula/powershell.rb'
+
       - name: Prepare Agent
+        if: steps.filter.outputs.workflows == 'true'
+
+      - name: Prepare Agent
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/prep
 
       - name: Uninstall PowerShell
+        if: steps.filter.outputs.workflows == 'true'
         shell: bash
         run: |
           cd /
@@ -50,4 +60,5 @@ jobs:
           sudo pkgutil --forget ${PKG_ID}
 
       - name: Install and Test Formula
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/installAndTest
