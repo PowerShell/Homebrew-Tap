@@ -8,7 +8,7 @@ permissions: read-all
 on:
   push:
     paths:
-      - '.github/workflows/powershell-preview.yml'
+      - '.github/workflows/PR-powershell-preview.yml'
       - 'Formula/powershell-preview.rb'
     branches:
       - master
