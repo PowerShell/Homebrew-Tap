@@ -35,16 +35,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+      - name: Check for applicable files
+         uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
         id: filter
         with:
           filters: |
             workflows:
               - '.github/workflows/PR-powershell.yml'
               - 'Formula/powershell.rb'
-
-      - name: Prepare Agent
-        if: steps.filter.outputs.workflows == 'true'
 
       - name: Prepare Agent
         if: steps.filter.outputs.workflows == 'true'
