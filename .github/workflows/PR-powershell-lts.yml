@@ -8,14 +8,11 @@ permissions: read-all
 on:
   push:
     paths:
-      - '.github/workflows/powershell-lts.yml'
+      - '.github/workflows/PR-powershell-lts.yml'
       - 'Formula/powershell-lts.rb'
     branches:
       - master
   pull_request:
-    paths:
-      - '.github/workflows/powershell-lts.yml'
-      - 'Formula/powershell-lts.rb'
 
 defaults:
   run:
@@ -36,8 +33,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Check for applicable files
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+        id: filter
+        with:
+          filters: |
+            workflows:
+              - '.github/workflows/PR-powershell-lts.yml'
+              - 'Formula/powershell-lts.rb'
+
       - name: Prepare Agent
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/prep
 
       - name: Install and Test Formula
+        if: steps.filter.outputs.workflows == 'true'
         uses: ./.github/workflows/composite/installAndTest
