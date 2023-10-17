@@ -41,8 +41,8 @@ jobs:
         with:
           filters: |
             workflows:
-              - .github/workflows/PR-powershell-preview.yml
-              - Formula/powershell-preview.rb
+              - .github/workflows/PR-powershell-daily.yml
+              - Formula/powershell-daily.rb
 
       - name: Prepare Agent
         if: steps.filter.outputs.workflows == 'true'
