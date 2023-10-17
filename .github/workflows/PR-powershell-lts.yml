@@ -40,7 +40,7 @@ jobs:
           filters: |
             workflows:
               - '.github/workflows/PR-powershell-lts.yml'
-              - 'Formula/powershell-preview.rb'
+              - 'Formula/powershell-lts.rb'
 
       - name: Prepare Agent
         if: steps.filter.outputs.workflows == 'true'
