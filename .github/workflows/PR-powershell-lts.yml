@@ -39,7 +39,7 @@ jobs:
         with:
           filters: |
             workflows:
-              - '.github/workflows/PR-powershell-preview.yml'
+              - '.github/workflows/PR-powershell-lts.yml'
               - 'Formula/powershell-preview.rb'
 
       - name: Prepare Agent
