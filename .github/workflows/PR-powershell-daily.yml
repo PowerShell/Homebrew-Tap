@@ -49,8 +49,8 @@ jobs:
           list-files: json
           filters: |
             workflows:
-              - '.github/workflows/PR-powershell-lts.yml'
-              - 'Formula/powershell-lts.rb'
+              - '.github/workflows/PR-powershell-daily.yml'
+              - 'Formula/powershell-daily.rb'
 
       - name: Capture outputs
         run: |
