@@ -37,7 +37,7 @@ jobs:
       pull-requests: read
     # Set job outputs to values from filter step
     outputs:
-      source: ${{ steps.filter.outputs.workflows }}
+      workflows: ${{ steps.filter.outputs.workflows }}
     steps:
       - name: checkout
         uses: actions/checkout@v4
