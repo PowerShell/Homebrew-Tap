@@ -37,7 +37,7 @@ jobs:
       pull-requests: read
     # Set job outputs to values from filter step
     outputs:
-      source: ${{ steps.filter.outputs.workflows }}
+      workflows: ${{ steps.filter.outputs.workflows }}
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -49,8 +49,8 @@ jobs:
           list-files: json
           filters: |
             workflows:
-              - '.github/workflows/PR-powershell-lts.yml'
-              - 'Formula/powershell-lts.rb'
+              - '.github/workflows/PR-powershell-daily.yml'
+              - 'Formula/powershell-daily.rb'
 
       - name: Capture outputs
         run: |
@@ -67,7 +67,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Check for applicable files
-        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
         id: filter
         with:
           filters: |
