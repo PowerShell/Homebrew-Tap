@@ -84,9 +84,9 @@ jobs:
         uses: ./.github/workflows/composite/installAndTest
 
   ready_to_merge:
-    name: LTS ready to merge
+    name: Daily ready to merge
     needs:
-      - homebrew-formula-lts
+      - homebrew-formula-daily
       - changes
     if: always()
     uses: PowerShell/compliance/.github/workflows/ready-to-merge.yml@v1.0.0
