@@ -40,7 +40,7 @@ jobs:
       workflows: ${{ steps.filter.outputs.workflows }}
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
         # For pull requests it's not necessary to checkout the code
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.2.0
@@ -64,7 +64,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Check for applicable files
         uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
