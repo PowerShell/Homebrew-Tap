@@ -10,10 +10,10 @@ class PowershellLts < Formula
   desc "Formula to install PowerShell Long Term Stable Channel"
   homepage "https://github.com/powershell/powershell"
 
-  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.7/powershell-7.4.7-osx-arm64.tar.gz"
-  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.7/powershell-7.4.7-osx-x64.tar.gz"
-  @arm64sha256 = "E673692D92D32378D9F4489E7919624A36D8915DA44A69E6125724250F52E2C6"
-  @x64sha256 = "F5E88C4AF7C4B989762561567C80A43B8F549278D41C7C08ACEE7ABBAFF25637"
+  @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.11/powershell-7.4.11-osx-arm64.tar.gz"
+  @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.4.11/powershell-7.4.11-osx-x64.tar.gz"
+  @arm64sha256 = "18F03E99BAA6B7BC7EC346AAA97CF7CA70782BBF746C9FF3D17CD45CF625DA04"
+  @x64sha256 = "53D00760D41B0A2B2E849C803C36E4C94707BA1808992AF96A2B0416D90F2BD5"
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?
@@ -26,7 +26,7 @@ class PowershellLts < Formula
     sha256 @arm64sha256
   end
 
-  version "7.4.7"
+  version "7.4.11"
   version_scheme 1
 
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
@@ -56,7 +56,7 @@ class PowershellLts < Formula
   end
 
   test do
-    assert_equal "7.4.7",
+    assert_equal "7.4.11",
                  shell_output("#{bin}/pwsh-lts -c '$psversiontable.psversion.tostring()'").strip
   end
 end
