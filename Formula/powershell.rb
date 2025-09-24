@@ -29,8 +29,8 @@ class Powershell < Formula
   version "7.5.2"
   version_scheme 1
 
-  # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
-  depends_on macos: :high_sierra
+  # .NET 9 requires macOS 13 (Ventura) - https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#apple
+  depends_on macos: :ventura
 
   def install
     libexec.install Dir["*"]
