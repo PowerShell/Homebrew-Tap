@@ -32,8 +32,8 @@ class PowershellDaily < Formula
   # Disabled because we are unable to maintain the automation to update the formula
   disable! date: "2023-03-03", because: :unmaintained
 
-  # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
-  depends_on macos: :high_sierra
+  # .NET 10 requires macOS 14 (Sonoma) - https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md#apple
+  depends_on macos: :sonoma
 
   def install
     libexec.install Dir["*"]
