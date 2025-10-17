@@ -12,8 +12,8 @@ class Powershell < Formula
 
   @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.3/powershell-7.5.3-osx-arm64.tar.gz"
   @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.3/powershell-7.5.3-osx-x64.tar.gz"
-  @arm64sha256 = "F4FAC5C72E8C09BA3B6FB8667F21B1D73556047819857FCE7883268D02369CDE"
-  @x64sha256 = "C31001F5BC0A4D236419AAF054D8C0316027A331D33E2FB41CF8D2764A357E05"
+  @arm64sha256 = "f4fac5c72e8c09ba3b6fb8667f21b1d73556047819857fce7883268d02369cde"
+  @x64sha256 = "c31001f5bc0a4d236419aaf054d8c0316027a331d33e2fb41cf8d2764a357e05"
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?

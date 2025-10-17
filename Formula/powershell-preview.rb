@@ -12,8 +12,8 @@ class PowershellPreview < Formula
 
   @arm64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.6.0-preview.5/powershell-7.6.0-preview.5-osx-arm64.tar.gz"
   @x64url = "https://github.com/PowerShell/PowerShell/releases/download/v7.6.0-preview.5/powershell-7.6.0-preview.5-osx-x64.tar.gz"
-  @arm64sha256 = "18403B89E00C42DDB8B74995B0C013D8F46BA2F3E0FB2DE12ED875093EE657C4"
-  @x64sha256 = "35D6BDFC660A6484F6BB72FF1E57D5C817FAD90C13F5839F62BB53A1FCB8819F"
+  @arm64sha256 = "18403b89e00c42ddb8b74995b0c013d8f46ba2f3e0fb2de12ed875093ee657c4"
+  @x64sha256 = "35d6bdfc660a6484f6bb72ff1e57d5c817fad90c13f5839f62bb53a1fcb8819f"
 
   # We do not specify `version "..."` as 'brew audit' will complain - see https://github.com/Homebrew/legacy-homebrew/issues/32540
   if Hardware::CPU.intel?
