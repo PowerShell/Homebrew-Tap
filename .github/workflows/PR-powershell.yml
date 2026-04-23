@@ -98,6 +98,6 @@ jobs:
       - homebrew-formula-stable
       - changes
     if: always()
-    uses: PowerShell/compliance/.github/workflows/ready-to-merge.yml@v1.0.0
+    uses: PowerShell/compliance/.github/workflows/ready-to-merge.yml@V1.0.1
     with:
       needs_context: ${{ toJson(needs) }}
