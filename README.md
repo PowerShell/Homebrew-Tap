@@ -1,83 +1,76 @@
 # Homebrew tap for PowerShell Products
 
-## Requirements
+> [!WARNING]
+> **This tap is deprecated and no longer maintained.**
+>
+> PowerShell is now available directly from
+> [Homebrew Core](https://formulae.brew.sh/formula/powershell) as well as
+> through the signed and notarized `.pkg` installers published by the PowerShell
+> project. Please migrate to one of the [recommended installation
+> methods](#recommended-installation) below. The `powershell/tap/*` formulas in
+> this repository no longer work.
 
-1. You must be running a version of macOS supported by PowerShell.
-1. See [Homebrew requirements](https://docs.brew.sh/Installation#macos-requirements)
+## Recommended installation
 
-## Fomula List
+### Homebrew (community formula)
 
-### PowerShell Channels
+PowerShell is published to [Homebrew Core](https://formulae.brew.sh/formula/powershell),
+so you no longer need this tap. Install it with:
 
-* [Stable](#powershell-stable)
-* [Preview](#powershell-preview)
-* [LTS](#powershell-lts)
-* [~~Daily~~](#powershell-daily)
-  * Daily is marked as not supported and will only be occasionally update. 
-    Please move to one of the other channels.
-    
-Learn more about using PowerShell ...
-
-Issues can be reported at [PowerShell/PowerShell](https://github.com/PowerShell/PowerShell/issues/new/choose).
-
-## Install Instructions
-
-### PowerShell Stable
-
-```
-brew install powershell/tap/powershell
+```sh
+brew install powershell
 ```
 
-You can now run the `pwsh` to get started.
+If you previously installed PowerShell using the Homebrew cask, you must first
+uninstall the cask before you can successfully install using the Homebrew
+formula:
 
-To upgrade to the latest version, run:
-
+```sh
+# Uninstall the PowerShell cask instance
+brew uninstall --cask powershell
+# Uninstall the PowerShell Preview cask instance
+brew uninstall --cask powershell-preview
 ```
+
+If you receive the message *"Warning: PowerShell is already installed, it's just
+not linked."*, run:
+
+```sh
+brew link powershell
+```
+
+To update PowerShell to the latest release:
+
+```sh
+brew update
 brew upgrade powershell
 ```
 
-### PowerShell Preview
+> [!NOTE]
+> The brew formula is maintained and supported by the Homebrew community. It
+> builds PowerShell from source code rather than installing a package built by
+> Microsoft. See
+> [Alternate ways to install PowerShell](https://learn.microsoft.com/powershell/scripting/install/alternate-install-methods#install-on-macos-using-homebrew)
+> for details.
 
-```
-brew install powershell/tap/powershell-preview
-```
+### Signed and notarized `.pkg` installers (macOS)
 
-You can now run the `pwsh-preview` to get started.
+Beginning with the May 2026 releases, the macOS `.pkg` packages published by the
+PowerShell project are **notarized and signed by Microsoft**, making them a fully
+supported macOS installation path. Download the package for your processor
+architecture from the [PowerShell releases page](https://github.com/PowerShell/PowerShell/releases)
+and open it to install.
 
-To upgrade to the latest version, run:
+For full instructions, including older-release Gatekeeper workarounds, see
+[Install PowerShell on macOS](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-macos).
 
-```
-brew upgrade powershell-preview
-```
+## Requirements
 
-### PowerShell LTS
+1. You must be running a version of macOS supported by PowerShell.
+1. See [Homebrew requirements](https://docs.brew.sh/Installation#macos-requirements).
 
-```
-brew install powershell/tap/powershell-lts
-```
-
-You can now run the `pwsh-lts` to get started.
-
-To upgrade to the latest version, run:
-
-```
-brew upgrade powershell-lts
-```
-
-
-### PowerShell Daily
-
-```
-brew install powershell/tap/powershell-daily
-```
-
-You can now run the `pwsh-daily` to get started.
-
-To upgrade to the latest version, run:
-
-```
-brew upgrade powershell-daily
-```
+Issues with PowerShell itself can be reported at
+[PowerShell/PowerShell](https://github.com/PowerShell/PowerShell/issues/new/choose).
 
 ## Code of Conduct
 
