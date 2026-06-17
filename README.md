@@ -4,7 +4,8 @@
 > **This tap is deprecated and no longer maintained.**
 >
 > PowerShell is now available directly from the official, signed and notarized
-> `.pkg` installers published by the PowerShell project, as well as from
+> `.pkg` installers published by the [PowerShell project](https://github.com/PowerShell/PowerShell),
+> as well as from
 > [Homebrew Core](https://formulae.brew.sh/formula/powershell). Please migrate to
 > one of the [recommended installation methods](#recommended-installation) below.
 > The `powershell/tap/*` formulas in this repository no longer work.
@@ -13,17 +14,16 @@
 
 ### Official `.pkg` installer (recommended)
 
-The PowerShell project publishes macOS `.pkg` installers for both Apple silicon
-(`arm64`) and Intel (`x64`) Macs. Beginning with the May 2026 releases, these
-packages are **notarized and signed by Microsoft**, so you can download and open
-them directly without bypassing Gatekeeper.
+The [PowerShell project](https://github.com/PowerShell/PowerShell) publishes
+macOS `.pkg` installers for both Apple silicon (`arm64`) and Intel (`x64`) Macs.
+Beginning with the May 2026 releases, these packages are **notarized and signed
+by Microsoft**, so you can download and open them directly.
 
 1. Download the `.pkg` for your processor architecture from the
    [PowerShell releases page](https://github.com/PowerShell/PowerShell/releases).
 2. Double-click the downloaded package and follow the installer prompts.
 
-To update, download and install the newer package. For full instructions —
-including the Gatekeeper workarounds needed for releases prior to May 2026 — see
+To update, download and install the newer package. For full instructions, see
 [Install PowerShell on macOS](https://learn.microsoft.com/powershell/scripting/install/install-powershell-on-macos).
 
 ### Homebrew (community formula)
