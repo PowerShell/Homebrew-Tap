@@ -1,83 +1,79 @@
 # Homebrew tap for PowerShell Products
 
-## Requirements
+> [!WARNING]
+> **This tap is deprecated and no longer maintained.**
+>
+> PowerShell is now available directly from the official, signed and notarized
+> `.pkg` installers published by the [PowerShell project](https://github.com/PowerShell/PowerShell),
+> as well as from
+> [Homebrew Core](https://formulae.brew.sh/formula/powershell). Please migrate to
+> one of the [recommended installation methods](#recommended-installation) below.
+> The `powershell/tap/*` formulas in this repository no longer work.
 
-1. You must be running a version of macOS supported by PowerShell.
-1. See [Homebrew requirements](https://docs.brew.sh/Installation#macos-requirements)
+## Recommended installation
 
-## Fomula List
+### Official `.pkg` installer (recommended)
 
-### PowerShell Channels
+The [PowerShell project](https://github.com/PowerShell/PowerShell) publishes
+macOS `.pkg` installers for both Apple silicon (`arm64`) and Intel (`x64`) Macs.
+Beginning with the May 2026 releases, these packages are **notarized and signed
+by Microsoft**, so you can download and open them directly.
 
-* [Stable](#powershell-stable)
-* [Preview](#powershell-preview)
-* [LTS](#powershell-lts)
-* [~~Daily~~](#powershell-daily)
-  * Daily is marked as not supported and will only be occasionally update. 
-    Please move to one of the other channels.
-    
-Learn more about using PowerShell ...
+1. Download the `.pkg` for your processor architecture from the
+   [PowerShell releases page](https://github.com/PowerShell/PowerShell/releases).
+2. Double-click the downloaded package and follow the installer prompts.
 
-Issues can be reported at [PowerShell/PowerShell](https://github.com/PowerShell/PowerShell/issues/new/choose).
+To update, download and install the newer package. For full instructions, see
+[Install PowerShell on macOS](https://learn.microsoft.com/powershell/scripting/install/install-powershell-on-macos).
 
-## Install Instructions
+### Homebrew (community formula)
 
-### PowerShell Stable
+PowerShell is also published to [Homebrew Core](https://formulae.brew.sh/formula/powershell),
+so you no longer need this tap. Install it with:
 
+```sh
+brew install powershell
 ```
-brew install powershell/tap/powershell
+
+If you previously installed PowerShell using the Homebrew cask, you must first
+uninstall the cask before you can successfully install using the Homebrew
+formula:
+
+```sh
+# Uninstall the PowerShell cask instance
+brew uninstall --cask powershell
+# Uninstall the PowerShell Preview cask instance
+brew uninstall --cask powershell-preview
 ```
 
-You can now run the `pwsh` to get started.
+If you receive the message *"Warning: PowerShell is already installed, it's just
+not linked."*, run:
 
-To upgrade to the latest version, run:
-
+```sh
+brew link powershell
 ```
+
+To update PowerShell to the latest release:
+
+```sh
+brew update
 brew upgrade powershell
 ```
 
-### PowerShell Preview
+> [!NOTE]
+> The brew formula is maintained and supported by the Homebrew community. It
+> builds PowerShell from source code rather than installing a package built by
+> Microsoft. See
+> [Alternate ways to install PowerShell](https://learn.microsoft.com/powershell/scripting/install/alternate-install-methods#install-on-macos-using-homebrew)
+> for details.
 
-```
-brew install powershell/tap/powershell-preview
-```
+## Requirements
 
-You can now run the `pwsh-preview` to get started.
+1. You must be running a version of macOS supported by PowerShell.
+1. See [Homebrew requirements](https://docs.brew.sh/Installation#macos-requirements).
 
-To upgrade to the latest version, run:
-
-```
-brew upgrade powershell-preview
-```
-
-### PowerShell LTS
-
-```
-brew install powershell/tap/powershell-lts
-```
-
-You can now run the `pwsh-lts` to get started.
-
-To upgrade to the latest version, run:
-
-```
-brew upgrade powershell-lts
-```
-
-
-### PowerShell Daily
-
-```
-brew install powershell/tap/powershell-daily
-```
-
-You can now run the `pwsh-daily` to get started.
-
-To upgrade to the latest version, run:
-
-```
-brew upgrade powershell-daily
-```
+Issues with PowerShell itself can be reported at
+[PowerShell/PowerShell](https://github.com/PowerShell/PowerShell/issues/new/choose).
 
 ## Code of Conduct
 
