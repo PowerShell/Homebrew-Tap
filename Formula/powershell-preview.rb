@@ -33,6 +33,10 @@ class PowershellPreview < Formula
     url :head
   end
 
+  # Deprecated: PowerShell is now maintained directly by Homebrew Core, which
+  # publishes its own `powershell` formula. Run `brew install powershell`.
+  deprecate! date: "2026-06-18", because: "is now maintained by Homebrew Core as the `powershell` formula"
+
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
   depends_on macos: :high_sierra
 
