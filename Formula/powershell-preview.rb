@@ -33,6 +33,11 @@ class PowershellPreview < Formula
     url :head
   end
 
+  # Deprecated: this tap is unmaintained now that PowerShell ships in Homebrew
+  # Core. Core has no preview formula; install the stable `powershell` formula
+  # (`brew install powershell`) or an official PowerShell preview package instead.
+  deprecate! date: "2026-06-18", because: "is unmaintained now that PowerShell is published to Homebrew Core"
+
   # .NET Core 3.1 requires High Sierra - https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?pivots=os-macos&tabs=netcore31
   depends_on macos: :high_sierra
 
